@@ -1,0 +1,12 @@
+{
+  "operationId": "getUserById",
+  "method": "GET",
+  "path": "/users/{userId}",
+  "examples": {
+    "response_200_Example_1": {
+      "id": "userId123",
+      "email": "john.doe@example.com",
+      "displayName": "John Doe"
+    }
+  }
+}

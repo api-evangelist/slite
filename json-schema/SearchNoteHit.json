@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/SearchNoteHit.json",
+  "title": "SearchNoteHit",
+  "properties": {
+    "parentNotes": {
+      "items": {
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "id"
+        ],
+        "type": "object"
+      },
+      "type": "array",
+      "description": "Breadcrumb of the note\nThe first element is the channel"
+    },
+    "reviewState": {
+      "$ref": "#/components/schemas/PublicApiReviewState",
+      "description": "Review state of the note\nCan be Verified, Outdated, VerificationRequested or VerificationExpired"
+    },
+    "highlight": {
+      "type": "string",
+      "description": "Part of the note that matched the query.\nIf an empty string is returned, it means only the title matched."
+    },
+    "type": {
+      "$ref": "#/components/schemas/SearchNoteType",
+      "description": "Type of the note\nIt can be a collection, a discussion or a default rich_text."
+    },
+    "archivedAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "description": "Date of the archiving of the note (null if not archived)"
+    },
+    "iconColor": {
+      "type": "string",
+      "nullable": true,
+      "description": "Optional icon color for the note."
+    },
+    "iconShape": {
+      "type": "string",
+      "nullable": true,
+      "description": "Optional icon identifier for the note."
+    },
+    "lastEditedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date of the last edition of the note"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date of the last update of the note"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the note"
+    },
+    "id": {
+      "type": "string",
+      "description": "Id of the note"
+    }
+  },
+  "required": [
+    "parentNotes",
+    "highlight",
+    "type",
+    "archivedAt",
+    "lastEditedAt",
+    "updatedAt",
+    "title",
+    "id"
+  ],
+  "type": "object"
+}

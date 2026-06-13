@@ -1,0 +1,3833 @@
+{
+  "openapi": "3.0.0",
+  "components": {
+    "examples": {},
+    "headers": {},
+    "parameters": {},
+    "requestBodies": {},
+    "responses": {},
+    "schemas": {
+      "Source": {
+        "properties": {
+          "explanation": {
+            "type": "string",
+            "description": "For super, gives explanation about the source"
+          },
+          "updatedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Date of the last update of the note"
+          },
+          "url": {
+            "type": "string",
+            "description": "Url of the note"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the note"
+          },
+          "id": {
+            "type": "string",
+            "description": "Id of the note"
+          }
+        },
+        "required": [
+          "updatedAt",
+          "url",
+          "title",
+          "id"
+        ],
+        "type": "object"
+      },
+      "AnswerAndSources": {
+        "properties": {
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "description": "Array of sources that were used to answer the question"
+          },
+          "answer": {
+            "type": "string",
+            "description": "Answer to the question"
+          }
+        },
+        "required": [
+          "sources",
+          "answer"
+        ],
+        "type": "object"
+      },
+      "PublicApiAuthError": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "Invalid apiKey"
+            ],
+            "nullable": false
+          },
+          "id": {
+            "type": "string",
+            "enum": [
+              "auth/unauthorized"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "message",
+          "id"
+        ],
+        "type": "object"
+      },
+      "PublicApiError": {
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "id"
+        ],
+        "type": "object"
+      },
+      "FieldErrors": {
+        "properties": {},
+        "type": "object",
+        "additionalProperties": {
+          "properties": {
+            "value": {},
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "type": "object"
+        }
+      },
+      "PublicApiFieldValidationError": {
+        "properties": {
+          "details": {
+            "$ref": "#/components/schemas/FieldErrors"
+          },
+          "message": {
+            "type": "string",
+            "enum": [
+              "Validation Failed"
+            ],
+            "nullable": false
+          },
+          "id": {
+            "type": "string",
+            "enum": [
+              "field-validation"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "message",
+          "id"
+        ],
+        "type": "object"
+      },
+      "PublicApiRateLimitError": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "You've reached the api rate limit. Please wait and retry later."
+            ],
+            "nullable": false
+          },
+          "id": {
+            "type": "string",
+            "enum": [
+              "rate-limit"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "message",
+          "id"
+        ],
+        "type": "object"
+      },
+      "AskQuotaExceededError": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "stack": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "number",
+            "format": "double"
+          },
+          "limit": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "resetDate": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name",
+          "message",
+          "id",
+          "status"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "AskRateLimitedError": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "stack": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "name",
+          "message",
+          "id",
+          "status"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "AskDisabledError": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "stack": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "name",
+          "message",
+          "id",
+          "status"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PublicApiDisabledError": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "This feature is disabled for your organization. Please contact support."
+            ]
+          },
+          "id": {
+            "type": "string",
+            "enum": [
+              "askx-disabled"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "message",
+          "id"
+        ],
+        "type": "object"
+      },
+      "PublicApiNotFoundError": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "Data source not found."
+            ]
+          },
+          "id": {
+            "type": "string",
+            "enum": [
+              "root-id-not-found"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "message",
+          "id"
+        ],
+        "type": "object"
+      },
+      "ObjectType": {
+        "enum": [
+          "markdown",
+          "html"
+        ],
+        "type": "string"
+      },
+      "ListResult": {
+        "properties": {
+          "hits": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array"
+          },
+          "nbPages": {
+            "type": "number",
+            "format": "double",
+            "description": "Total number of pages for the current query"
+          },
+          "page": {
+            "type": "number",
+            "format": "double",
+            "description": "Current page number of the search pagination"
+          }
+        },
+        "required": [
+          "hits",
+          "nbPages",
+          "page"
+        ],
+        "type": "object"
+      },
+      "ListPage": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 0
+      },
+      "ListHitsPerPage": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 1,
+        "maximum": 100
+      },
+      "PublicApiReviewState": {
+        "enum": [
+          "Verified",
+          "Outdated",
+          "VerificationRequested",
+          "VerificationExpired"
+        ],
+        "type": "string"
+      },
+      "NoteOwner": {
+        "properties": {
+          "groupId": {
+            "type": "string",
+            "description": "Group id of the owner (if owner is a group)"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User id of the owner (if owner is a user)"
+          }
+        },
+        "type": "object",
+        "description": "Owner of the note for review purposes.\nEither userId or groupId will be set, but not both."
+      },
+      "Note": {
+        "properties": {
+          "owner": {
+            "$ref": "#/components/schemas/NoteOwner",
+            "description": "Owner of the note for review purposes.\nEither userId or groupId will be set, but not both.\nIf no owner is set, this field will be omitted."
+          },
+          "reviewState": {
+            "$ref": "#/components/schemas/PublicApiReviewState",
+            "description": "Review state of the note\nCan be Verified, Outdated, VerificationRequested or VerificationExpired"
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Date of the archiving of the note (null if not archived)"
+          },
+          "lastEditedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the last edition of the note"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the last update of the note"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the creation of the note"
+          },
+          "columns": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "If note is in a collection, it will contain its column names"
+          },
+          "attributes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "If note is in a collection, it will contain its attributes ordered\nby column"
+          },
+          "url": {
+            "type": "string",
+            "description": "Url to the note"
+          },
+          "parentNoteId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Parent note id of the current note.\nIt can be null if it's a root note."
+          },
+          "iconColor": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional icon color for the note."
+          },
+          "iconShape": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional icon identifier for the note."
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the note"
+          },
+          "id": {
+            "type": "string",
+            "description": "Id of the note"
+          }
+        },
+        "required": [
+          "archivedAt",
+          "lastEditedAt",
+          "updatedAt",
+          "createdAt",
+          "url",
+          "parentNoteId",
+          "title",
+          "id"
+        ],
+        "type": "object"
+      },
+      "PaginatedNotes": {
+        "properties": {
+          "notes": {
+            "items": {
+              "$ref": "#/components/schemas/Note"
+            },
+            "type": "array"
+          },
+          "total": {
+            "type": "number",
+            "format": "double",
+            "description": "Total number of children"
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "description": "Is there any other page to fetch"
+          },
+          "nextCursor": {
+            "type": "string",
+            "nullable": true,
+            "description": "Next cursor to continue fetching the paginate children"
+          }
+        },
+        "required": [
+          "notes",
+          "total",
+          "hasNextPage",
+          "nextCursor"
+        ],
+        "type": "object"
+      },
+      "KnowledgeManagementFirst": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 1,
+        "maximum": 50
+      },
+      "Me": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email address of the authenticated user."
+          },
+          "organizationDomain": {
+            "type": "string",
+            "description": "Domain of the organization the authenticated user belongs to."
+          },
+          "organizationName": {
+            "type": "string",
+            "description": "Name of the organization the authenticated user belongs to."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name of the authenticated user."
+          }
+        },
+        "required": [
+          "email",
+          "organizationDomain",
+          "organizationName",
+          "displayName"
+        ],
+        "type": "object"
+      },
+      "ListNotesOrderBy": {
+        "enum": [
+          "lastEditedAt_DESC",
+          "lastEditedAt_ASC",
+          "listPosition_DESC",
+          "listPosition_ASC"
+        ],
+        "type": "string"
+      },
+      "NoteWithContent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Note"
+          },
+          {
+            "properties": {
+              "content": {
+                "type": "string",
+                "description": "Content of the note in Markdown, Html, or SliteML",
+                "format": "blob"
+              }
+            },
+            "required": [
+              "content"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "NoteContentFormat": {
+        "enum": [
+          "md",
+          "html",
+          "sliteml"
+        ],
+        "type": "string"
+      },
+      "DeletedNoteResult": {},
+      "Markdown": {
+        "type": "string",
+        "format": "blob"
+      },
+      "Html": {
+        "type": "string"
+      },
+      "Record_string.unknown_": {
+        "properties": {},
+        "additionalProperties": {},
+        "type": "object",
+        "description": "Construct a type with a set of properties K of type T"
+      },
+      "ExportedNote": {
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/Record_string.unknown_",
+            "description": "Metadata of the note"
+          },
+          "snapshot": {
+            "type": "string",
+            "description": "Snapshot of the note",
+            "format": "blob"
+          }
+        },
+        "required": [
+          "metadata",
+          "snapshot"
+        ],
+        "type": "object"
+      },
+      "SearchNoteType": {
+        "enum": [
+          "rich_text",
+          "discussion",
+          "collection"
+        ],
+        "type": "string"
+      },
+      "SearchNoteHit": {
+        "properties": {
+          "parentNotes": {
+            "items": {
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title",
+                "id"
+              ],
+              "type": "object"
+            },
+            "type": "array",
+            "description": "Breadcrumb of the note\nThe first element is the channel"
+          },
+          "reviewState": {
+            "$ref": "#/components/schemas/PublicApiReviewState",
+            "description": "Review state of the note\nCan be Verified, Outdated, VerificationRequested or VerificationExpired"
+          },
+          "highlight": {
+            "type": "string",
+            "description": "Part of the note that matched the query.\nIf an empty string is returned, it means only the title matched."
+          },
+          "type": {
+            "$ref": "#/components/schemas/SearchNoteType",
+            "description": "Type of the note\nIt can be a collection, a discussion or a default rich_text."
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Date of the archiving of the note (null if not archived)"
+          },
+          "iconColor": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional icon color for the note."
+          },
+          "iconShape": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional icon identifier for the note."
+          },
+          "lastEditedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the last edition of the note"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the last update of the note"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the note"
+          },
+          "id": {
+            "type": "string",
+            "description": "Id of the note"
+          }
+        },
+        "required": [
+          "parentNotes",
+          "highlight",
+          "type",
+          "archivedAt",
+          "lastEditedAt",
+          "updatedAt",
+          "title",
+          "id"
+        ],
+        "type": "object"
+      },
+      "SearchNoteResult": {
+        "properties": {
+          "hits": {
+            "items": {
+              "$ref": "#/components/schemas/SearchNoteHit"
+            },
+            "type": "array"
+          },
+          "nbPages": {
+            "type": "number",
+            "format": "double",
+            "description": "Total number of pages for the current query"
+          },
+          "page": {
+            "type": "number",
+            "format": "double",
+            "description": "Current page number of the search pagination"
+          }
+        },
+        "required": [
+          "hits",
+          "nbPages",
+          "page"
+        ],
+        "type": "object"
+      },
+      "SearchNotePage": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 0
+      },
+      "SearchNoteHitsPerPage": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 1,
+        "maximum": 100
+      },
+      "User": {
+        "properties": {
+          "organizationRole": {
+            "type": "string",
+            "description": "Role of the user in the organization"
+          },
+          "isGuest": {
+            "type": "boolean",
+            "description": "Whether the user is a guest"
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Whether the user is archived"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name of the user"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of the user"
+          },
+          "id": {
+            "type": "string",
+            "description": "User ID"
+          }
+        },
+        "required": [
+          "displayName",
+          "email",
+          "id"
+        ],
+        "type": "object"
+      },
+      "PaginatedUsers": {
+        "properties": {
+          "nextCursor": {
+            "type": "string",
+            "nullable": true,
+            "description": "Cursor for the next page"
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "description": "Whether there are more results"
+          },
+          "total": {
+            "type": "number",
+            "format": "double",
+            "description": "Total count of users matching the query"
+          },
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/User"
+            },
+            "type": "array",
+            "description": "List of users"
+          }
+        },
+        "required": [
+          "nextCursor",
+          "hasNextPage",
+          "total",
+          "users"
+        ],
+        "type": "object"
+      },
+      "Group": {
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Description of the group"
+          },
+          "name": {
+            "type": "string",
+            "description": "Group name"
+          },
+          "id": {
+            "type": "string",
+            "description": "Group ID"
+          }
+        },
+        "required": [
+          "description",
+          "name",
+          "id"
+        ],
+        "type": "object"
+      },
+      "PaginatedGroups": {
+        "properties": {
+          "nextCursor": {
+            "type": "string",
+            "nullable": true,
+            "description": "Cursor for the next page"
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "description": "Whether there are more results"
+          },
+          "total": {
+            "type": "number",
+            "format": "double",
+            "description": "Total count of groups matching the query"
+          },
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            },
+            "type": "array",
+            "description": "List of groups"
+          }
+        },
+        "required": [
+          "nextCursor",
+          "hasNextPage",
+          "total",
+          "groups"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "API keys can be generated under Settings > API"
+      }
+    }
+  },
+  "info": {
+    "title": "Public Slite api",
+    "version": "1",
+    "description": "Access your Slite documents, search, create, update...",
+    "license": {
+      "name": "private"
+    },
+    "contact": {
+      "name": "Slite"
+    }
+  },
+  "paths": {
+    "/ask": {
+      "get": {
+        "operationId": "ask",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnswerAndSources"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "answer": "The onboarding steps are...",
+                      "sources": [
+                        {
+                          "title": "Onboarding",
+                          "url": "https://slite.slite.page/p/S1TSuHnZf/Security-at-Slite",
+                          "id": "S1TSuHnZf",
+                          "updatedAt": "2021-01-01T00:00:00.000Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Ask feature is disabled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AskDisabledError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Ask rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AskRateLimitedError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Ask a question to your notes in natural language.\nThe scope of the notes used to answer the question is restricted to the authenticated user.\nVarious optional filters are available to restrict the scope of the notes even more.",
+        "summary": "Ask a question",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Question to ask on your notes",
+            "in": "query",
+            "name": "question",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "What are the onboarding steps?"
+          },
+          {
+            "description": "Optional filter to only return notes under this parent note id",
+            "in": "query",
+            "name": "parentNoteId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional filter to use a specific assistant for super only",
+            "in": "query",
+            "name": "assistantId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/ask/index": {
+      "post": {
+        "operationId": "index",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "title": "Onboarding",
+                      "url": "https://slite.slite.page/p/S1TSuHnZf/Security-at-Slite",
+                      "id": "S1TSuHnZf",
+                      "updatedAt": "2021-01-01T00:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "This feature is disabled for your organization. Please contact support.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiDisabledError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data source not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiNotFoundError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Index a custom content for AskX usage.",
+        "summary": "Index a custom content",
+        "deprecated": true,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "rootId": {
+                    "type": "string",
+                    "description": "Root id of the object to gather sources from. This should be created from the UI as a new custom data source.",
+                    "example": [
+                      "a2ZSuHnZf"
+                    ]
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "Unique id of the object to index scoped to the rootId",
+                    "example": [
+                      "custom-id"
+                    ]
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the object to index",
+                    "example": [
+                      "Note title"
+                    ]
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content of the object to index",
+                    "example": [
+                      "# Content in markdown"
+                    ]
+                  },
+                  "type": {
+                    "$ref": "#/components/schemas/ObjectType",
+                    "description": "Type of the object to index. Can be \"markdown\" or \"html\"",
+                    "example": [
+                      "markdown"
+                    ]
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Last update date of the object to index. Used to determine the freshness of the object.",
+                    "example": [
+                      "2021-01-01T00:00:00Z"
+                    ]
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "Url of the object to index. Used to redirect to the proper page.",
+                    "example": [
+                      "https://slite.slite.page/p/S1TSuHnZf/Security-at-Slite"
+                    ]
+                  }
+                },
+                "required": [
+                  "rootId",
+                  "id",
+                  "title",
+                  "content",
+                  "type",
+                  "updatedAt",
+                  "url"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete-index",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "ok"
+                  ],
+                  "type": "object"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "ok": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "This feature is disabled for your organization. Please contact support.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiDisabledError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data source not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiNotFoundError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Delete a custom content from AskX usage.",
+        "summary": "Delete custom content",
+        "deprecated": true,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "rootId": {
+                    "type": "string",
+                    "description": "Root id of the object to gather sources from. This should be created from the UI as a new custom data source.",
+                    "example": [
+                      "a2ZSuHnZf"
+                    ]
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "Unique id of the object to index scoped to the rootId",
+                    "example": [
+                      "custom-id"
+                    ]
+                  }
+                },
+                "required": [
+                  "rootId",
+                  "id"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "list-index",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResult"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "nbPages": 2,
+                      "page": 0,
+                      "hits": [
+                        {
+                          "title": "Onboarding",
+                          "url": "https://slite.slite.page/p/S1TSuHnZf/Security-at-Slite",
+                          "id": "S1TSuHnZf",
+                          "updatedAt": "2021-01-01T00:00:00.000Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "This feature is disabled for your organization. Please contact support.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiDisabledError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data source not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiNotFoundError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "List custom content ids from AskX usage.",
+        "summary": "List custom content",
+        "deprecated": true,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Root id of the object to gather sources from. This should be created from the UI as a new custom data source.",
+            "in": "query",
+            "name": "rootId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "a2ZSuHnZf"
+          },
+          {
+            "description": "Used to perform pagination on search",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ListPage"
+            }
+          },
+          {
+            "description": "Specify how many notes to return per page",
+            "in": "query",
+            "name": "hitsPerPage",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ListHitsPerPage"
+            }
+          }
+        ]
+      }
+    },
+    "/knowledge-management/notes": {
+      "get": {
+        "operationId": "listNotesForKnowledgeManagement",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedNotes"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "List notes for knowledge management.",
+        "summary": "List notes for knowledge management",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Optional filter to only return notes in special review states.",
+            "in": "query",
+            "name": "reviewStateList",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/PublicApiReviewState"
+              }
+            }
+          },
+          {
+            "description": "Optional: user or group ids to filter notes by owner",
+            "in": "query",
+            "name": "ownerIdList",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Optional: channel ids to filter notes by channel",
+            "in": "query",
+            "name": "channelIdList",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Optional: number of trailing days to consider",
+            "in": "query",
+            "name": "sinceDaysAgo",
+            "required": false,
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          {
+            "description": "Maximum number of notes to return. Defaults to 20.",
+            "in": "query",
+            "name": "first",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/KnowledgeManagementFirst"
+            }
+          },
+          {
+            "description": "Cursor to use to continue fetching notes",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/knowledge-management/notes/public": {
+      "get": {
+        "operationId": "listPublicNotesForKnowledgeManagement",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedNotes"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "List public notes for knowledge management.",
+        "summary": "List public notes for knowledge management",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Optional filter to only return notes in special review states.",
+            "in": "query",
+            "name": "reviewStateList",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/PublicApiReviewState"
+              }
+            }
+          },
+          {
+            "description": "Optional: user or group ids to filter notes by owner",
+            "in": "query",
+            "name": "ownerIdList",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Optional: channel ids to filter notes by channel",
+            "in": "query",
+            "name": "channelIdList",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Optional: number of trailing days to consider",
+            "in": "query",
+            "name": "sinceDaysAgo",
+            "required": false,
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          {
+            "description": "Maximum number of notes to return. Defaults to 20.",
+            "in": "query",
+            "name": "first",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/KnowledgeManagementFirst"
+            }
+          },
+          {
+            "description": "Cursor to use to continue fetching notes",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/knowledge-management/notes/inactive": {
+      "get": {
+        "operationId": "listInactiveNotesForKnowledgeManagement",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedNotes"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "List inactive notes for knowledge management.",
+        "summary": "List inactive notes for knowledge management",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Optional: user or group ids to filter notes by owner",
+            "in": "query",
+            "name": "ownerIdList",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Optional: channel ids to filter notes by channel",
+            "in": "query",
+            "name": "channelIdList",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Maximum number of notes to return. Defaults to 20.",
+            "in": "query",
+            "name": "first",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/KnowledgeManagementFirst"
+            }
+          },
+          {
+            "description": "Cursor to use to continue fetching notes",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/knowledge-management/notes/empty": {
+      "get": {
+        "operationId": "listEmptyNotesForKnowledgeManagement",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedNotes"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "List empty notes for knowledge management.",
+        "summary": "List empty notes for knowledge management",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Optional: user or group ids to filter notes by owner",
+            "in": "query",
+            "name": "ownerIdList",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Optional: channel ids to filter notes by channel",
+            "in": "query",
+            "name": "channelIdList",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Maximum number of notes to return. Defaults to 20.",
+            "in": "query",
+            "name": "first",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/KnowledgeManagementFirst"
+            }
+          },
+          {
+            "description": "Cursor to use to continue fetching notes",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/me": {
+      "get": {
+        "operationId": "me",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Me"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "displayName": "Jane Doe",
+                      "organizationName": "Example Corp",
+                      "organizationDomain": "example.com",
+                      "email": "jane.doe@example.com"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Return authenticated user information.",
+        "summary": "Return the authenticated user information.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": []
+      }
+    },
+    "/notes": {
+      "get": {
+        "operationId": "listNotes",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedNotes"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "hasNextPage": false,
+                      "nextCursor": null,
+                      "total": 2,
+                      "notes": [
+                        {
+                          "id": "noteId1",
+                          "createdAt": "2024-01-01T00:00:00.000Z",
+                          "updatedAt": "2024-01-01T00:00:00.000Z",
+                          "lastEditedAt": "2024-01-02T00:00:00.000Z",
+                          "parentNoteId": "parentNoteId",
+                          "title": "First note",
+                          "url": "https://slite.slite.com/api/s/noteId1/First-note",
+                          "archivedAt": null
+                        },
+                        {
+                          "id": "noteId2",
+                          "createdAt": "2024-01-01T00:00:00.000Z",
+                          "updatedAt": "2024-01-02T00:00:00.000Z",
+                          "lastEditedAt": "2024-01-02T00:00:00.000Z",
+                          "parentNoteId": "parentNoteId",
+                          "title": "Second note",
+                          "url": "https://slite.slite.com/api/s/noteId2/Second-note",
+                          "archivedAt": null
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "List notes with optional filtering by owner",
+        "summary": "List notes",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Optional: User id to filter notes by owner",
+            "in": "query",
+            "name": "ownerId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional: filter to only return notes under this parent note id",
+            "in": "query",
+            "name": "parentNoteId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional: To change the order of the returned notes",
+            "in": "query",
+            "name": "orderBy",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ListNotesOrderBy"
+            }
+          },
+          {
+            "description": "Cursor to use to continue fetching notes",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "post": {
+        "operationId": "createNote",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Note"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "id": "noteId",
+                      "createdAt": "2024-01-01T00:00:00.000Z",
+                      "updatedAt": "2024-01-01T00:00:00.000Z",
+                      "lastEditedAt": "2024-01-02T00:00:00.000Z",
+                      "parentNoteId": "parentNoteId",
+                      "title": "Slite interconnection",
+                      "url": "https://slite.slite.com/api/s/noteId/Slite%20interconnection",
+                      "archivedAt": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Create a note from markdown content, with a templateId or just an empty one.\nIf no parentNoteId is specified, it will be created in your personal channel.",
+        "summary": "Create a note",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the note to create",
+                    "example": [
+                      "Note title"
+                    ]
+                  },
+                  "parentNoteId": {
+                    "type": "string",
+                    "description": "Below which other note to create this note.\nIf not specified, the note would be created in your personal channel",
+                    "example": [
+                      "parentNoteId"
+                    ]
+                  },
+                  "templateId": {
+                    "type": "string",
+                    "description": "If you want to apply a template to the created note",
+                    "example": [
+                      "templateId"
+                    ]
+                  },
+                  "markdown": {
+                    "$ref": "#/components/schemas/Markdown",
+                    "description": "Either provide Markdown content to fill the note",
+                    "example": [
+                      "# Content in markdown"
+                    ]
+                  },
+                  "html": {
+                    "$ref": "#/components/schemas/Html",
+                    "description": "Or you can provide HTML content"
+                  },
+                  "attributes": {
+                    "items": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "type": "array",
+                    "description": "Attributes for the parent collection ordered by column.\nIf they don't match the appropriate type, they would be ignored"
+                  }
+                },
+                "required": [
+                  "title"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notes/{noteId}": {
+      "get": {
+        "operationId": "getNoteById",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteWithContent"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "id": "noteId",
+                      "parentNoteId": "parentNoteId",
+                      "title": "Slite interconnection",
+                      "createdAt": "2024-01-01T00:00:00.000Z",
+                      "updatedAt": "2024-01-01T00:00:00.000Z",
+                      "lastEditedAt": "2024-01-02T00:00:00.000Z",
+                      "archivedAt": null,
+                      "url": "https://slite.slite.com/api/s/noteId/Slite%20interconnection",
+                      "content": "\n# How the public api works?\n\nThe public api consist of few simple REST route exposed via openapi standard.\n"
+                    }
+                  },
+                  "Example 2": {
+                    "value": {
+                      "id": "noteIdInACollection",
+                      "parentNoteId": "parentCollectionId",
+                      "title": "Slite collection",
+                      "createdAt": "2024-01-01T00:00:00.000Z",
+                      "updatedAt": "2024-01-01T00:00:00.000Z",
+                      "lastEditedAt": "2024-01-02T00:00:00.000Z",
+                      "archivedAt": null,
+                      "url": "https://slite.slite.com/api/s/noteId/Slite%20interconnection",
+                      "content": "\n# How can we reach the collection attributes?\n\nThey will be returned ordered in an `attributes` array.\n",
+                      "attributes": [
+                        "Cycle J",
+                        "Done"
+                      ],
+                      "columns": [
+                        "Cycle",
+                        "Status"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Return a note by id",
+        "summary": "Return a note",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Note id to return",
+            "in": "path",
+            "name": "noteId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Format of the content to return (Markdown, Html, or SliteML)",
+            "in": "query",
+            "name": "format",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/NoteContentFormat"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "deleteNoteById",
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Delete a note and its children by id. !!! It's irreversible !!!",
+        "summary": "Delete a note and its children",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Note id to delete",
+            "in": "path",
+            "name": "noteId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateNote",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Note"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "id": "noteId",
+                      "createdAt": "2024-01-01T00:00:00.000Z",
+                      "updatedAt": "2024-01-01T00:00:00.000Z",
+                      "lastEditedAt": "2024-01-02T00:00:00.000Z",
+                      "parentNoteId": "parentNoteId",
+                      "title": "Slite interconnection",
+                      "url": "https://slite.slite.com/api/s/noteId/Slite%20interconnection",
+                      "archivedAt": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Update note content with markdown and/or title",
+        "summary": "Update a note",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Note id to update",
+            "in": "path",
+            "name": "noteId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "noteId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the note to update",
+                    "example": [
+                      "New title"
+                    ]
+                  },
+                  "markdown": {
+                    "$ref": "#/components/schemas/Markdown",
+                    "description": "New markdown content to fill the note",
+                    "example": [
+                      "# New content"
+                    ]
+                  },
+                  "html": {
+                    "$ref": "#/components/schemas/Html",
+                    "description": "New html content to fill the note"
+                  },
+                  "attributes": {
+                    "items": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "type": "array",
+                    "description": "Attributes for the parent collection ordered by column.\nIf they don't match the appropriate type, they would be ignored"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notes/{noteId}/children": {
+      "get": {
+        "operationId": "getNoteChildren",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedNotes"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "hasNextPage": false,
+                      "nextCursor": null,
+                      "total": 1,
+                      "notes": [
+                        {
+                          "id": "noteId",
+                          "createdAt": "2024-01-01T00:00:00.000Z",
+                          "updatedAt": "2024-01-01T00:00:00.000Z",
+                          "lastEditedAt": "2024-01-02T00:00:00.000Z",
+                          "parentNoteId": "parentNoteId",
+                          "title": "Slite interconnection",
+                          "url": "https://slite.slite.com/api/s/noteId/Slite%20interconnection",
+                          "archivedAt": null
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Return note children by parent note id",
+        "summary": "Return note children by parent note id",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Note id to fetch its children",
+            "in": "path",
+            "name": "noteId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Cursor to use to continue fetching the note children\nIt's only used if current note has more than 50 children",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/notes/{noteId}/verify": {
+      "put": {
+        "operationId": "verifyNote",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Note"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "id": "noteId",
+                      "createdAt": "2024-01-01T00:00:00.000Z",
+                      "updatedAt": "2024-01-01T00:00:00.000Z",
+                      "lastEditedAt": "2024-01-02T00:00:00.000Z",
+                      "parentNoteId": "parentNoteId",
+                      "title": "Slite interconnection",
+                      "url": "https://slite.slite.com/api/s/noteId/Slite%20interconnection",
+                      "archivedAt": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Set Verified status on a note with optional verification expiration",
+        "summary": "Verify a note",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Note id to update",
+            "in": "path",
+            "name": "noteId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "noteId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "until": {
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true,
+                    "description": "Expiration of the verification status (set null for no expiration)",
+                    "example": [
+                      "2024-01-01T00:00:00.000Z"
+                    ]
+                  }
+                },
+                "required": [
+                  "until"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notes/{noteId}/flag-as-outdated": {
+      "put": {
+        "operationId": "flagNoteAsOutdated",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Note"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "id": "noteId",
+                      "createdAt": "2024-01-01T00:00:00.000Z",
+                      "updatedAt": "2024-01-01T00:00:00.000Z",
+                      "lastEditedAt": "2024-01-02T00:00:00.000Z",
+                      "parentNoteId": "parentNoteId",
+                      "title": "Slite interconnection",
+                      "url": "https://slite.slite.com/api/s/noteId/Slite%20interconnection",
+                      "archivedAt": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Set Outdated status on a note with optional reason",
+        "summary": "Flag note as outdated",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Note id to update",
+            "in": "path",
+            "name": "noteId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "noteId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "reason": {
+                    "type": "string",
+                    "description": "Outdated reason",
+                    "example": [
+                      "Information are incorrect"
+                    ]
+                  }
+                },
+                "required": [
+                  "reason"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notes/{noteId}/archived": {
+      "put": {
+        "operationId": "updateNoteArchivedState",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Note"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "id": "noteId",
+                      "createdAt": "2024-01-01T00:00:00.000Z",
+                      "updatedAt": "2024-01-01T00:00:00.000Z",
+                      "lastEditedAt": "2024-01-02T00:00:00.000Z",
+                      "parentNoteId": "parentNoteId",
+                      "title": "Slite interconnection",
+                      "url": "https://slite.slite.com/api/s/noteId/Slite%20interconnection",
+                      "archivedAt": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Update the archived state of a note",
+        "summary": "Archive or unarchive a note",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Note id to update",
+            "in": "path",
+            "name": "noteId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "noteId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "archived": {
+                    "type": "boolean",
+                    "description": "Set to true to archive the note, false to unarchive it",
+                    "example": [
+                      true
+                    ]
+                  }
+                },
+                "required": [
+                  "archived"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notes/{noteId}/owner": {
+      "put": {
+        "operationId": "updateNoteOwner",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Note"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "id": "noteId",
+                      "createdAt": "2024-01-01T00:00:00.000Z",
+                      "updatedAt": "2024-01-01T00:00:00.000Z",
+                      "lastEditedAt": "2024-01-02T00:00:00.000Z",
+                      "parentNoteId": "parentNoteId",
+                      "title": "Slite interconnection",
+                      "url": "https://slite.slite.com/api/s/noteId/Slite%20interconnection",
+                      "archivedAt": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Update the owner of a note, it can be a user or a group",
+        "summary": "Update note owner",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Note id to update",
+            "in": "path",
+            "name": "noteId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "noteId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "description": "User id to set as the owner of the note",
+                    "example": [
+                      "userId"
+                    ]
+                  },
+                  "groupId": {
+                    "type": "string",
+                    "description": "Group id to set as the owner of the note",
+                    "example": [
+                      "groupId"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notes/{noteId}/tiles/{tileId}": {
+      "put": {
+        "operationId": "updateTile",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "Direct url of the tile in the note"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Update or create tile.\nA tile is rendered with a structured header and a markdown content.\nYou can create a tile by copying a tile id from Slite by clicking on `Copy block id` on an empty line setting in the editor.",
+        "summary": "Update a tile in a note",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Note id containing the tile id",
+            "in": "path",
+            "name": "noteId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "noteId"
+          },
+          {
+            "description": "Tile id to update",
+            "in": "path",
+            "name": "tileId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "tileId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "Title of the tile",
+                    "example": [
+                      "Public api progress"
+                    ]
+                  },
+                  "iconURL": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "Icon URL to show in the tile",
+                    "example": [
+                      "https://assets.slite.com/logos/favicon.ico"
+                    ]
+                  },
+                  "status": {
+                    "properties": {
+                      "colorHex": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "#fcc93c",
+                        "pattern": "^#[0-9a-fA-F]{6}$"
+                      },
+                      "label": {
+                        "type": "string",
+                        "description": "Content of the status",
+                        "example": "In progress"
+                      }
+                    },
+                    "required": [
+                      "label"
+                    ],
+                    "type": "object",
+                    "nullable": true,
+                    "description": "If needed a tile status can be specified with its color",
+                    "example": [
+                      {
+                        "label": "In progress",
+                        "colorHex": "#fcc93c"
+                      }
+                    ]
+                  },
+                  "url": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "The tile can be linked to an external URL",
+                    "example": [
+                      "https://slite.com/"
+                    ]
+                  },
+                  "content": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "The content of the tile. Can be in markdown.",
+                    "example": [
+                      "- [ ] Release it to everyone"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search-notes": {
+      "get": {
+        "operationId": "searchNotes",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchNoteResult"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "nbPages": 2,
+                      "page": 0,
+                      "hits": [
+                        {
+                          "lastEditedAt": "2021-01-02T00:00:00.000Z",
+                          "highlight": "...easily connect Slite to your own process, you can use <b>Slite public api</b> to perform search...",
+                          "id": "noteId",
+                          "title": "Slite interconnection",
+                          "type": "rich_text",
+                          "updatedAt": "2021-01-01T00:00:00.000Z",
+                          "archivedAt": null,
+                          "parentNotes": [
+                            {
+                              "id": "channelId",
+                              "title": "Channel"
+                            },
+                            {
+                              "id": "parentId",
+                              "title": "Parent note"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Search notes based on a query.\nThe scope of the notes is restricted to the authenticated user.\nVarious optional filters are available to restrict the scope of the search even more.",
+        "summary": "Search notes",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Query used to perform the note search, default to empty string",
+            "in": "query",
+            "name": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Slite public api"
+          },
+          {
+            "description": "Optional filter to only return notes under this parent note id",
+            "in": "query",
+            "name": "parentNoteId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional filter to only return notes with a depth (number of parents) equal to a specified value",
+            "in": "query",
+            "name": "depth",
+            "required": false,
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          {
+            "description": "Optional filter to return notes in a special review state\nCan be Verified, Outdated, VerificationRequested or VerificationExpired",
+            "in": "query",
+            "name": "reviewState",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/PublicApiReviewState"
+            }
+          },
+          {
+            "description": "Used to perform pagination on search",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/SearchNotePage"
+            }
+          },
+          {
+            "description": "Specify how many notes to return per page",
+            "in": "query",
+            "name": "hitsPerPage",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/SearchNoteHitsPerPage"
+            }
+          },
+          {
+            "description": "Inject a tag before the matching query",
+            "in": "query",
+            "name": "highlightPreTag",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "<b>"
+          },
+          {
+            "description": "Inject a tag after the matching query",
+            "in": "query",
+            "name": "highlightPostTag",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "</b>"
+          },
+          {
+            "description": "Optional filter to only return notes edited after a specific date",
+            "in": "query",
+            "name": "lastEditedAfter",
+            "required": false,
+            "schema": {}
+          },
+          {
+            "description": "Optional filter to only return notes where metadata has changed after a specific date",
+            "in": "query",
+            "name": "lastUpdatedAfter",
+            "required": false,
+            "schema": {}
+          },
+          {
+            "description": "Optional filter to also include archived notes in the search results (default to false)",
+            "in": "query",
+            "name": "includeArchived",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ]
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "operationId": "getUserById",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "id": "userId123",
+                      "email": "john.doe@example.com",
+                      "displayName": "John Doe"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiNotFoundError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get a user by ID",
+        "summary": "Get user by ID",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "User ID to retrieve",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "operationId": "searchUsers",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedUsers"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "users": [
+                        {
+                          "id": "userId123",
+                          "email": "john.doe@example.com",
+                          "displayName": "John Doe"
+                        },
+                        {
+                          "id": "userId456",
+                          "email": "jane.doe@example.com",
+                          "displayName": "Jane Doe"
+                        }
+                      ],
+                      "total": 2,
+                      "hasNextPage": false,
+                      "nextCursor": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Search for users by email, name, or username",
+        "summary": "Search users",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Search query to match against email, display name",
+            "in": "query",
+            "name": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "john"
+          },
+          {
+            "description": "Include archived users in the search results",
+            "in": "query",
+            "name": "includeArchived",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Cursor to use to continue fetching users",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/groups/{groupId}": {
+      "get": {
+        "operationId": "getGroupById",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Group"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "id": "groupId123",
+                      "name": "Developers",
+                      "description": "Group for all developer team members"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Group not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiNotFoundError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get a group by ID",
+        "summary": "Get group by ID",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Group ID to retrieve",
+            "in": "path",
+            "name": "groupId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/groups": {
+      "get": {
+        "operationId": "searchGroups",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedGroups"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "groups": [
+                        {
+                          "id": "groupId123",
+                          "name": "Developers",
+                          "description": "Group for all developer team members"
+                        }
+                      ],
+                      "total": 2,
+                      "hasNextPage": false,
+                      "nextCursor": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiAuthError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Input validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiFieldValidationError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limitation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiRateLimitError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiError"
+                }
+              }
+            }
+          }
+        },
+        "description": "Search for groups by name",
+        "summary": "Search groups",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "description": "Search query to match against name",
+            "in": "query",
+            "name": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Developers"
+          },
+          {
+            "description": "Cursor to use to continue fetching groups",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.slite.com/v1"
+    }
+  ]
+}

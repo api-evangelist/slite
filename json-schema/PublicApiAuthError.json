@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/PublicApiAuthError.json",
+  "title": "PublicApiAuthError",
+  "properties": {
+    "message": {
+      "type": "string",
+      "enum": [
+        "Invalid apiKey"
+      ],
+      "nullable": false
+    },
+    "id": {
+      "type": "string",
+      "enum": [
+        "auth/unauthorized"
+      ],
+      "nullable": false
+    }
+  },
+  "required": [
+    "message",
+    "id"
+  ],
+  "type": "object"
+}

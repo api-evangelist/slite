@@ -1,0 +1,279 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "slite": "https://developers.slite.com/vocab#"
+  },
+  "@type": "WebAPI",
+  "@id": "https://api.slite.com/v1",
+  "name": "Public Slite api",
+  "description": "Access your Slite documents, search, create, update...",
+  "version": "1",
+  "url": "https://api.slite.com/v1",
+  "documentation": "https://developers.slite.com/",
+  "termsOfService": "https://slite.com/terms",
+  "provider": {
+    "@type": "Organization",
+    "name": "Slite",
+    "url": "https://slite.com",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "support@slite.com"
+    }
+  },
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://api.slite.com/v1"
+  },
+  "potentialAction": [
+    {
+      "@type": "Action",
+      "name": "Ask a question",
+      "identifier": "ask",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/ask"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Index a custom content",
+      "identifier": "index",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "POST",
+        "urlTemplate": "https://api.slite.com/v1/ask/index"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Delete custom content",
+      "identifier": "delete-index",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "DELETE",
+        "urlTemplate": "https://api.slite.com/v1/ask/index"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "List custom content",
+      "identifier": "list-index",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/ask/index"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "List notes for knowledge management",
+      "identifier": "listNotesForKnowledgeManagement",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/knowledge-management/notes"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "List public notes for knowledge management",
+      "identifier": "listPublicNotesForKnowledgeManagement",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/knowledge-management/notes/public"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "List inactive notes for knowledge management",
+      "identifier": "listInactiveNotesForKnowledgeManagement",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/knowledge-management/notes/inactive"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "List empty notes for knowledge management",
+      "identifier": "listEmptyNotesForKnowledgeManagement",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/knowledge-management/notes/empty"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Return the authenticated user information.",
+      "identifier": "me",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/me"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "List notes",
+      "identifier": "listNotes",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/notes"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Create a note",
+      "identifier": "createNote",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "POST",
+        "urlTemplate": "https://api.slite.com/v1/notes"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Return a note",
+      "identifier": "getNoteById",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/notes/{noteId}"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Delete a note and its children",
+      "identifier": "deleteNoteById",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "DELETE",
+        "urlTemplate": "https://api.slite.com/v1/notes/{noteId}"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Update a note",
+      "identifier": "updateNote",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "PUT",
+        "urlTemplate": "https://api.slite.com/v1/notes/{noteId}"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Return note children by parent note id",
+      "identifier": "getNoteChildren",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/notes/{noteId}/children"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Verify a note",
+      "identifier": "verifyNote",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "PUT",
+        "urlTemplate": "https://api.slite.com/v1/notes/{noteId}/verify"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Flag note as outdated",
+      "identifier": "flagNoteAsOutdated",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "PUT",
+        "urlTemplate": "https://api.slite.com/v1/notes/{noteId}/flag-as-outdated"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Archive or unarchive a note",
+      "identifier": "updateNoteArchivedState",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "PUT",
+        "urlTemplate": "https://api.slite.com/v1/notes/{noteId}/archived"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Update note owner",
+      "identifier": "updateNoteOwner",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "PUT",
+        "urlTemplate": "https://api.slite.com/v1/notes/{noteId}/owner"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Update a tile in a note",
+      "identifier": "updateTile",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "PUT",
+        "urlTemplate": "https://api.slite.com/v1/notes/{noteId}/tiles/{tileId}"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Search notes",
+      "identifier": "searchNotes",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/search-notes"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Get user by ID",
+      "identifier": "getUserById",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/users/{userId}"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Search users",
+      "identifier": "searchUsers",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/users"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Get group by ID",
+      "identifier": "getGroupById",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/groups/{groupId}"
+      }
+    },
+    {
+      "@type": "Action",
+      "name": "Search groups",
+      "identifier": "searchGroups",
+      "target": {
+        "@type": "EntryPoint",
+        "httpMethod": "GET",
+        "urlTemplate": "https://api.slite.com/v1/groups"
+      }
+    }
+  ]
+}

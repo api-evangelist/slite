@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/Note.json",
+  "title": "Note",
+  "properties": {
+    "owner": {
+      "$ref": "#/components/schemas/NoteOwner",
+      "description": "Owner of the note for review purposes.\nEither userId or groupId will be set, but not both.\nIf no owner is set, this field will be omitted."
+    },
+    "reviewState": {
+      "$ref": "#/components/schemas/PublicApiReviewState",
+      "description": "Review state of the note\nCan be Verified, Outdated, VerificationRequested or VerificationExpired"
+    },
+    "archivedAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "description": "Date of the archiving of the note (null if not archived)"
+    },
+    "lastEditedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date of the last edition of the note"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date of the last update of the note"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date of the creation of the note"
+    },
+    "columns": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "description": "If note is in a collection, it will contain its column names"
+    },
+    "attributes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "description": "If note is in a collection, it will contain its attributes ordered\nby column"
+    },
+    "url": {
+      "type": "string",
+      "description": "Url to the note"
+    },
+    "parentNoteId": {
+      "type": "string",
+      "nullable": true,
+      "description": "Parent note id of the current note.\nIt can be null if it's a root note."
+    },
+    "iconColor": {
+      "type": "string",
+      "nullable": true,
+      "description": "Optional icon color for the note."
+    },
+    "iconShape": {
+      "type": "string",
+      "nullable": true,
+      "description": "Optional icon identifier for the note."
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the note"
+    },
+    "id": {
+      "type": "string",
+      "description": "Id of the note"
+    }
+  },
+  "required": [
+    "archivedAt",
+    "lastEditedAt",
+    "updatedAt",
+    "createdAt",
+    "url",
+    "parentNoteId",
+    "title",
+    "id"
+  ],
+  "type": "object"
+}

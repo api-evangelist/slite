@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/Source.json",
+  "title": "Source",
+  "properties": {
+    "explanation": {
+      "type": "string",
+      "description": "For super, gives explanation about the source"
+    },
+    "updatedAt": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "description": "Date of the last update of the note"
+    },
+    "url": {
+      "type": "string",
+      "description": "Url of the note"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the note"
+    },
+    "id": {
+      "type": "string",
+      "description": "Id of the note"
+    }
+  },
+  "required": [
+    "updatedAt",
+    "url",
+    "title",
+    "id"
+  ],
+  "type": "object"
+}

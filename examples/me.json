@@ -1,0 +1,13 @@
+{
+  "operationId": "me",
+  "method": "GET",
+  "path": "/me",
+  "examples": {
+    "response_200_Example_1": {
+      "displayName": "Jane Doe",
+      "organizationName": "Example Corp",
+      "organizationDomain": "example.com",
+      "email": "jane.doe@example.com"
+    }
+  }
+}

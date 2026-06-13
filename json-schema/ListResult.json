@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/ListResult.json",
+  "title": "ListResult",
+  "properties": {
+    "hits": {
+      "items": {
+        "$ref": "#/components/schemas/Source"
+      },
+      "type": "array"
+    },
+    "nbPages": {
+      "type": "number",
+      "format": "double",
+      "description": "Total number of pages for the current query"
+    },
+    "page": {
+      "type": "number",
+      "format": "double",
+      "description": "Current page number of the search pagination"
+    }
+  },
+  "required": [
+    "hits",
+    "nbPages",
+    "page"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,12 @@
+{
+  "operationId": "getGroupById",
+  "method": "GET",
+  "path": "/groups/{groupId}",
+  "examples": {
+    "response_200_Example_1": {
+      "id": "groupId123",
+      "name": "Developers",
+      "description": "Group for all developer team members"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "operationId": "delete-index",
+  "method": "DELETE",
+  "path": "/ask/index",
+  "examples": {
+    "response_200_Example_1": {
+      "ok": true
+    }
+  }
+}

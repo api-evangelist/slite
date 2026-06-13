@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/Me.json",
+  "title": "Me",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "Email address of the authenticated user."
+    },
+    "organizationDomain": {
+      "type": "string",
+      "description": "Domain of the organization the authenticated user belongs to."
+    },
+    "organizationName": {
+      "type": "string",
+      "description": "Name of the organization the authenticated user belongs to."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Display name of the authenticated user."
+    }
+  },
+  "required": [
+    "email",
+    "organizationDomain",
+    "organizationName",
+    "displayName"
+  ],
+  "type": "object"
+}

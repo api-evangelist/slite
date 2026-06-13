@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/PaginatedUsers.json",
+  "title": "PaginatedUsers",
+  "properties": {
+    "nextCursor": {
+      "type": "string",
+      "nullable": true,
+      "description": "Cursor for the next page"
+    },
+    "hasNextPage": {
+      "type": "boolean",
+      "description": "Whether there are more results"
+    },
+    "total": {
+      "type": "number",
+      "format": "double",
+      "description": "Total count of users matching the query"
+    },
+    "users": {
+      "items": {
+        "$ref": "#/components/schemas/User"
+      },
+      "type": "array",
+      "description": "List of users"
+    }
+  },
+  "required": [
+    "nextCursor",
+    "hasNextPage",
+    "total",
+    "users"
+  ],
+  "type": "object"
+}

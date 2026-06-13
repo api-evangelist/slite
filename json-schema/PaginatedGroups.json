@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/PaginatedGroups.json",
+  "title": "PaginatedGroups",
+  "properties": {
+    "nextCursor": {
+      "type": "string",
+      "nullable": true,
+      "description": "Cursor for the next page"
+    },
+    "hasNextPage": {
+      "type": "boolean",
+      "description": "Whether there are more results"
+    },
+    "total": {
+      "type": "number",
+      "format": "double",
+      "description": "Total count of groups matching the query"
+    },
+    "groups": {
+      "items": {
+        "$ref": "#/components/schemas/Group"
+      },
+      "type": "array",
+      "description": "List of groups"
+    }
+  },
+  "required": [
+    "nextCursor",
+    "hasNextPage",
+    "total",
+    "groups"
+  ],
+  "type": "object"
+}

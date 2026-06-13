@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/NoteContentFormat.json",
+  "title": "NoteContentFormat",
+  "enum": [
+    "md",
+    "html",
+    "sliteml"
+  ],
+  "type": "string"
+}

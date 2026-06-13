@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/PublicApiReviewState.json",
+  "title": "PublicApiReviewState",
+  "enum": [
+    "Verified",
+    "Outdated",
+    "VerificationRequested",
+    "VerificationExpired"
+  ],
+  "type": "string"
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/NoteWithContent.json",
+  "title": "NoteWithContent",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Note"
+    },
+    {
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Content of the note in Markdown, Html, or SliteML",
+          "format": "blob"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "type": "object"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/NoteOwner.json",
+  "title": "NoteOwner",
+  "properties": {
+    "groupId": {
+      "type": "string",
+      "description": "Group id of the owner (if owner is a group)"
+    },
+    "userId": {
+      "type": "string",
+      "description": "User id of the owner (if owner is a user)"
+    }
+  },
+  "type": "object",
+  "description": "Owner of the note for review purposes.\nEither userId or groupId will be set, but not both."
+}

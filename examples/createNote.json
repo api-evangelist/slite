@@ -1,0 +1,17 @@
+{
+  "operationId": "createNote",
+  "method": "POST",
+  "path": "/notes",
+  "examples": {
+    "response_200_Example_1": {
+      "id": "noteId",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z",
+      "lastEditedAt": "2024-01-02T00:00:00.000Z",
+      "parentNoteId": "parentNoteId",
+      "title": "Slite interconnection",
+      "url": "https://slite.slite.com/api/s/noteId/Slite%20interconnection",
+      "archivedAt": null
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "operationId": "searchUsers",
+  "method": "GET",
+  "path": "/users",
+  "examples": {
+    "response_200_Example_1": {
+      "users": [
+        {
+          "id": "userId123",
+          "email": "john.doe@example.com",
+          "displayName": "John Doe"
+        },
+        {
+          "id": "userId456",
+          "email": "jane.doe@example.com",
+          "displayName": "Jane Doe"
+        }
+      ],
+      "total": 2,
+      "hasNextPage": false,
+      "nextCursor": null
+    }
+  }
+}

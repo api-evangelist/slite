@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/PublicApiRateLimitError.json",
+  "title": "PublicApiRateLimitError",
+  "properties": {
+    "message": {
+      "type": "string",
+      "enum": [
+        "You've reached the api rate limit. Please wait and retry later."
+      ],
+      "nullable": false
+    },
+    "id": {
+      "type": "string",
+      "enum": [
+        "rate-limit"
+      ],
+      "nullable": false
+    }
+  },
+  "required": [
+    "message",
+    "id"
+  ],
+  "type": "object"
+}

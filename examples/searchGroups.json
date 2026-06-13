@@ -1,0 +1,19 @@
+{
+  "operationId": "searchGroups",
+  "method": "GET",
+  "path": "/groups",
+  "examples": {
+    "response_200_Example_1": {
+      "groups": [
+        {
+          "id": "groupId123",
+          "name": "Developers",
+          "description": "Group for all developer team members"
+        }
+      ],
+      "total": 2,
+      "hasNextPage": false,
+      "nextCursor": null
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/ListPage.json",
+  "title": "ListPage",
+  "type": "integer",
+  "format": "int32",
+  "minimum": 0
+}

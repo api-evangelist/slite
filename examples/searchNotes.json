@@ -1,0 +1,32 @@
+{
+  "operationId": "searchNotes",
+  "method": "GET",
+  "path": "/search-notes",
+  "examples": {
+    "response_200_Example_1": {
+      "nbPages": 2,
+      "page": 0,
+      "hits": [
+        {
+          "lastEditedAt": "2021-01-02T00:00:00.000Z",
+          "highlight": "...easily connect Slite to your own process, you can use <b>Slite public api</b> to perform search...",
+          "id": "noteId",
+          "title": "Slite interconnection",
+          "type": "rich_text",
+          "updatedAt": "2021-01-01T00:00:00.000Z",
+          "archivedAt": null,
+          "parentNotes": [
+            {
+              "id": "channelId",
+              "title": "Channel"
+            },
+            {
+              "id": "parentId",
+              "title": "Parent note"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/PublicApiFieldValidationError.json",
+  "title": "PublicApiFieldValidationError",
+  "properties": {
+    "details": {
+      "$ref": "#/components/schemas/FieldErrors"
+    },
+    "message": {
+      "type": "string",
+      "enum": [
+        "Validation Failed"
+      ],
+      "nullable": false
+    },
+    "id": {
+      "type": "string",
+      "enum": [
+        "field-validation"
+      ],
+      "nullable": false
+    }
+  },
+  "required": [
+    "message",
+    "id"
+  ],
+  "type": "object"
+}

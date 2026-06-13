@@ -1,0 +1,18 @@
+{
+  "operationId": "ask",
+  "method": "GET",
+  "path": "/ask",
+  "examples": {
+    "response_200_Example_1": {
+      "answer": "The onboarding steps are...",
+      "sources": [
+        {
+          "title": "Onboarding",
+          "url": "https://slite.slite.page/p/S1TSuHnZf/Security-at-Slite",
+          "id": "S1TSuHnZf",
+          "updatedAt": "2021-01-01T00:00:00.000Z"
+        }
+      ]
+    }
+  }
+}

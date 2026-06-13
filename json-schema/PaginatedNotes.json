@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/PaginatedNotes.json",
+  "title": "PaginatedNotes",
+  "properties": {
+    "notes": {
+      "items": {
+        "$ref": "#/components/schemas/Note"
+      },
+      "type": "array"
+    },
+    "total": {
+      "type": "number",
+      "format": "double",
+      "description": "Total number of children"
+    },
+    "hasNextPage": {
+      "type": "boolean",
+      "description": "Is there any other page to fetch"
+    },
+    "nextCursor": {
+      "type": "string",
+      "nullable": true,
+      "description": "Next cursor to continue fetching the paginate children"
+    }
+  },
+  "required": [
+    "notes",
+    "total",
+    "hasNextPage",
+    "nextCursor"
+  ],
+  "type": "object"
+}

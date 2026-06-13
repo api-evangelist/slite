@@ -1,0 +1,37 @@
+{
+  "operationId": "getNoteById",
+  "method": "GET",
+  "path": "/notes/{noteId}",
+  "examples": {
+    "response_200_Example_1": {
+      "id": "noteId",
+      "parentNoteId": "parentNoteId",
+      "title": "Slite interconnection",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z",
+      "lastEditedAt": "2024-01-02T00:00:00.000Z",
+      "archivedAt": null,
+      "url": "https://slite.slite.com/api/s/noteId/Slite%20interconnection",
+      "content": "\n# How the public api works?\n\nThe public api consist of few simple REST route exposed via openapi standard.\n"
+    },
+    "response_200_Example_2": {
+      "id": "noteIdInACollection",
+      "parentNoteId": "parentCollectionId",
+      "title": "Slite collection",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z",
+      "lastEditedAt": "2024-01-02T00:00:00.000Z",
+      "archivedAt": null,
+      "url": "https://slite.slite.com/api/s/noteId/Slite%20interconnection",
+      "content": "\n# How can we reach the collection attributes?\n\nThey will be returned ordered in an `attributes` array.\n",
+      "attributes": [
+        "Cycle J",
+        "Done"
+      ],
+      "columns": [
+        "Cycle",
+        "Status"
+      ]
+    }
+  }
+}

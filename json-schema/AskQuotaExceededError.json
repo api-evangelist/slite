@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/AskQuotaExceededError.json",
+  "title": "AskQuotaExceededError",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "stack": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "number",
+      "format": "double"
+    },
+    "limit": {
+      "type": "number",
+      "format": "double",
+      "nullable": true
+    },
+    "resetDate": {
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "required": [
+    "name",
+    "message",
+    "id",
+    "status"
+  ],
+  "type": "object",
+  "additionalProperties": false
+}

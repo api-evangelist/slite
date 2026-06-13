@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/ListNotesOrderBy.json",
+  "title": "ListNotesOrderBy",
+  "enum": [
+    "lastEditedAt_DESC",
+    "lastEditedAt_ASC",
+    "listPosition_DESC",
+    "listPosition_ASC"
+  ],
+  "type": "string"
+}

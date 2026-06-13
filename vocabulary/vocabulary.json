@@ -1,0 +1,115 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/slite/main/vocabulary/vocabulary.json",
+  "title": "Slite API Vocabulary",
+  "description": "Terms, concepts, and operations defined in the Slite Public API",
+  "terms": [
+    {
+      "term": "NoteOwner",
+      "description": "Owner of the note for review purposes.\nEither userId or groupId will be set, but not both."
+    },
+    {
+      "term": "Record_string.unknown_",
+      "description": "Construct a type with a set of properties K of type T"
+    },
+    {
+      "term": "ask",
+      "description": "Ask a question to your notes in natural language.\nThe scope of the notes used to answer the question is restricted to the authenticated user.\nVarious optional filters are available to restrict the scope of the notes even more."
+    },
+    {
+      "term": "createNote",
+      "description": "Create a note from markdown content, with a templateId or just an empty one.\nIf no parentNoteId is specified, it will be created in your personal channel."
+    },
+    {
+      "term": "delete-index",
+      "description": "Delete a custom content from AskX usage."
+    },
+    {
+      "term": "deleteNoteById",
+      "description": "Delete a note and its children by id. !!! It's irreversible !!!"
+    },
+    {
+      "term": "flagNoteAsOutdated",
+      "description": "Set Outdated status on a note with optional reason"
+    },
+    {
+      "term": "getGroupById",
+      "description": "Get a group by ID"
+    },
+    {
+      "term": "getNoteById",
+      "description": "Return a note by id"
+    },
+    {
+      "term": "getNoteChildren",
+      "description": "Return note children by parent note id"
+    },
+    {
+      "term": "getUserById",
+      "description": "Get a user by ID"
+    },
+    {
+      "term": "index",
+      "description": "Index a custom content for AskX usage."
+    },
+    {
+      "term": "list-index",
+      "description": "List custom content ids from AskX usage."
+    },
+    {
+      "term": "listEmptyNotesForKnowledgeManagement",
+      "description": "List empty notes for knowledge management."
+    },
+    {
+      "term": "listInactiveNotesForKnowledgeManagement",
+      "description": "List inactive notes for knowledge management."
+    },
+    {
+      "term": "listNotes",
+      "description": "List notes with optional filtering by owner"
+    },
+    {
+      "term": "listNotesForKnowledgeManagement",
+      "description": "List notes for knowledge management."
+    },
+    {
+      "term": "listPublicNotesForKnowledgeManagement",
+      "description": "List public notes for knowledge management."
+    },
+    {
+      "term": "me",
+      "description": "Return authenticated user information."
+    },
+    {
+      "term": "searchGroups",
+      "description": "Search for groups by name"
+    },
+    {
+      "term": "searchNotes",
+      "description": "Search notes based on a query.\nThe scope of the notes is restricted to the authenticated user.\nVarious optional filters are available to restrict the scope of the search even more."
+    },
+    {
+      "term": "searchUsers",
+      "description": "Search for users by email, name, or username"
+    },
+    {
+      "term": "updateNote",
+      "description": "Update note content with markdown and/or title"
+    },
+    {
+      "term": "updateNoteArchivedState",
+      "description": "Update the archived state of a note"
+    },
+    {
+      "term": "updateNoteOwner",
+      "description": "Update the owner of a note, it can be a user or a group"
+    },
+    {
+      "term": "updateTile",
+      "description": "Update or create tile.\nA tile is rendered with a structured header and a markdown content.\nYou can create a tile by copying a tile id from Slite by clicking on `Copy block id` on an empty line setting in the editor."
+    },
+    {
+      "term": "verifyNote",
+      "description": "Set Verified status on a note with optional verification expiration"
+    }
+  ]
+}

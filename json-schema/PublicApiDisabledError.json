@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/slite/main/json-schema/PublicApiDisabledError.json",
+  "title": "PublicApiDisabledError",
+  "properties": {
+    "message": {
+      "type": "string",
+      "enum": [
+        "This feature is disabled for your organization. Please contact support."
+      ]
+    },
+    "id": {
+      "type": "string",
+      "enum": [
+        "askx-disabled"
+      ],
+      "nullable": false
+    }
+  },
+  "required": [
+    "message",
+    "id"
+  ],
+  "type": "object"
+}
