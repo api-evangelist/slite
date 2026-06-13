@@ -1,0 +1,76 @@
+name: Slite Plans and Pricing
+description: >-
+  Slite offers tiered pricing plans for teams of all sizes, from individual
+  contributors to large enterprises. All paid plans include access to the
+  Slite Public API. Pricing is per user per month and scales linearly with
+  team size, with discounts available for annual billing.
+url: https://slite.com/pricing
+plans:
+  - name: Standard
+    description: >-
+      Essentials for teams building and maintaining a shared knowledge base.
+      Includes a collaborative editor with built-in AI, AI-powered Ask search
+      with a usage limit, and core integrations such as Slack and Google Drive.
+    price: 10.00
+    unit: user/month
+    billing: monthly
+    annualPrice: 8.00
+    annualUnit: user/month
+    features:
+      - Unlimited documents and notes
+      - AI-powered Ask search (30 questions/month/user)
+      - Channels and structured spaces
+      - Permissions and version history
+      - Slack and Google Drive integrations
+      - Collaborative editor with built-in AI
+      - Public API access
+    apiAccess: true
+    support:
+      - Email support
+  - name: Knowledge Suite
+    description: >-
+      For growing teams and multiple departments that need enterprise search
+      across multiple sources, higher AI query limits, SSO, user provisioning,
+      and advanced analytics. Includes everything in Standard plus expanded
+      AI and compliance features.
+    price: 25.00
+    unit: user/month
+    billing: monthly
+    annualPrice: 16.00
+    annualUnit: user/month
+    features:
+      - Everything in Standard
+      - AI-powered Ask search (100 questions/month/user)
+      - Enterprise Search across multiple sources (Salesforce, HubSpot, GitHub, Jira, BigQuery, Intercom, Asana)
+      - Custom domain for public docs
+      - User provisioning (OpenID) and SSO
+      - Doc verification and workspace analytics
+      - MCP Server integration
+      - Priority integrations
+      - Dedicated support manager
+    apiAccess: true
+    support:
+      - Email support
+      - Dedicated support manager
+  - name: Enterprise
+    description: >-
+      For large organizations with strict security, compliance, and support
+      requirements. Builds on the Knowledge Suite with reader-only users,
+      audit logs, SLAs, and a dedicated account manager.
+    price: custom
+    unit: user/month
+    billing: custom
+    features:
+      - Everything in Knowledge Suite
+      - Reader-only users
+      - Audit logs for compliance
+      - Dedicated account manager
+      - Priority support and custom SLAs
+      - Advanced security controls
+      - HIPAA and SOC 2 Type II compliance
+      - GDPR compliance
+    apiAccess: true
+    support:
+      - Dedicated account manager
+      - Priority support with SLAs
+      - Custom onboarding

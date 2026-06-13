@@ -1,0 +1,46 @@
+name: Slite API Rate Limits
+description: >-
+  Slite enforces rate limits on its Public API to ensure fair usage across all
+  customers. When a rate limit is exceeded, the API returns an HTTP 429 status
+  with a message instructing callers to wait before retrying. Specific numeric
+  thresholds are not publicly documented; developers should implement
+  exponential backoff and retry logic. AI Ask query limits are governed by the
+  plan tier rather than the API rate limiter.
+url: https://developers.slite.com/
+rateLimits:
+  - name: API Rate Limit
+    description: >-
+      A global rate limit applies to all Public API endpoints at the base URL
+      https://api.slite.com/v1. When exceeded, the API responds with HTTP 429
+      and the message "You've reached the api rate limit. Please wait and retry
+      later." Exact request-per-minute or request-per-hour thresholds are not
+      published.
+    type: global
+    statusCode: 429
+    errorMessage: "You've reached the api rate limit. Please wait and retry later."
+    headers:
+      - name: Retry-After
+        description: Not currently published in the Slite API specification.
+        documented: false
+    guidance:
+      - Implement exponential backoff on HTTP 429 responses.
+      - Avoid high-frequency polling; use webhooks or scheduled batch jobs where possible.
+      - Revoke and rotate API keys rather than sharing a single key across integrations.
+  - name: AI Ask Query Limit
+    description: >-
+      The number of AI-powered Ask (natural language) queries is capped by
+      pricing plan, not by a traditional API rate limit header. Standard plan
+      users are limited to 30 Ask queries per user per month; Knowledge Suite
+      plan users receive 100 queries per user per month.
+    type: quota
+    scope: user/month
+    tiers:
+      - plan: Standard
+        limit: 30
+        unit: queries/user/month
+      - plan: Knowledge Suite
+        limit: 100
+        unit: queries/user/month
+      - plan: Enterprise
+        limit: custom
+        unit: queries/user/month

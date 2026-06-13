@@ -1,0 +1,83 @@
+aid: slite
+name: Slite
+description: >-
+  Slite is a collaborative documentation and knowledge base platform with a
+  REST API for managing notes, channels, documents, templates, and team
+  knowledge bases. It enables asynchronous work through AI-powered search,
+  document creation, and automated knowledge management workflows. The Slite
+  Public API provides programmatic access to workspaces using Bearer token
+  authentication and follows the OpenAPI v3.0 standard.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/slite/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+type: Index
+tags:
+  - Documentation
+  - Knowledge Base
+  - Collaboration
+  - Notes
+  - Team
+  - Asynchronous Work
+  - AI
+  - Search
+apis:
+  - aid: slite:slite-api
+    name: Slite API
+    description: >-
+      The Slite Public API provides programmatic access to your workspace
+      enabling you to create, update, search, and delete notes and documents.
+      Manage knowledge base content, users, groups, and leverage AI-powered
+      Ask search capabilities via REST endpoints authenticated with a personal
+      API key.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.slite.com/
+    baseURL: https://api.slite.com/v1
+    tags:
+      - Notes
+      - Documents
+      - Search
+      - Knowledge Management
+      - Users
+      - Groups
+    properties:
+      - type: Documentation
+        url: https://developers.slite.com/docs/getting-started
+      - type: OpenAPI
+        url: https://api.slite.com/openapi.json
+      - type: Authentication
+        url: https://developers.slite.com/docs/getting-started
+    contact:
+      - FN: Slite Support
+        email: support@slite.com
+common:
+  - type: Documentation
+    url: https://developers.slite.com/
+  - type: OpenAPI
+    url: https://api.slite.com/openapi.json
+  - type: Authentication
+    url: https://developers.slite.com/docs/getting-started
+  - type: GitHubOrganization
+    url: https://github.com/sliteteam
+  - type: GitHubRepository
+    url: https://github.com/sliteteam/slite-api-js-examples
+  - type: Blog
+    url: https://slite.com/blog
+  - type: Changelog
+    url: https://slite.com/changelog
+  - type: Status
+    url: https://status.slite.com
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/slitehq
+  - type: X
+    url: https://twitter.com/slitehq
+  - type: Plans
+    url: plans/slite-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/slite-rate-limits.yml
+  - type: FinOps
+    url: finops/slite-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

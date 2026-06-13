@@ -1,0 +1,80 @@
+name: Slite FinOps
+description: >-
+  Financial operations guidance for teams consuming the Slite API and platform.
+  Slite pricing scales linearly per active user per month, making cost
+  management primarily a function of seat management, plan selection, and
+  AI query consumption. There is no metered API cost beyond the subscription
+  tier; all API access is included with paid plans.
+url: https://slite.com/pricing
+costModel:
+  type: per-seat-subscription
+  description: >-
+    Slite charges a flat per-user-per-month rate based on the selected plan.
+    API access is included in all paid plans at no additional charge. The main
+    cost driver is the number of active users provisioned in the workspace.
+  billingCycle:
+    - monthly
+    - annual
+  annualDiscount: true
+  annualDiscountNote: Annual billing reduces per-user costs compared to monthly billing.
+costDrivers:
+  - name: Active Users
+    description: >-
+      Each user provisioned in a Slite workspace incurs the per-user monthly
+      fee. Deprovisioning inactive users is the primary lever for reducing spend.
+    impact: high
+  - name: Plan Tier
+    description: >-
+      Upgrading from Standard ($10/user/month) to Knowledge Suite ($25/user/month)
+      significantly increases per-seat cost. Evaluate whether enterprise search,
+      SSO, and higher Ask query limits justify the upgrade for each team.
+    impact: high
+  - name: AI Ask Query Consumption
+    description: >-
+      Ask queries are capped per user per month by plan. Exceeding limits may
+      require a plan upgrade. Monitor usage patterns to identify power users and
+      forecast plan requirements.
+    impact: medium
+  - name: Reader-Only Users
+    description: >-
+      Enterprise plan supports reader-only user seats which may be priced lower
+      than full editor seats. Use reader seats for stakeholders who only consume
+      documentation to reduce effective per-seat cost.
+    impact: medium
+optimization:
+  - name: Deprovision Inactive Users
+    description: >-
+      Audit workspace members regularly and remove users who have not logged in
+      within 30-60 days. Costs scale directly with seat count.
+    action: Quarterly user access review
+  - name: Annual vs Monthly Billing
+    description: >-
+      Annual billing offers a lower per-user monthly rate than month-to-month.
+      Commit to annual billing for stable teams to reduce costs.
+    action: Switch to annual billing for teams with predictable headcount
+  - name: Right-size Plan Tier
+    description: >-
+      Start on the Standard plan and upgrade only when teams require enterprise
+      search integrations, SSO, or higher AI query allocations. Avoid over-
+      provisioning on the Knowledge Suite plan for small teams.
+    action: Review plan features annually against actual usage
+  - name: Consolidate API Keys
+    description: >-
+      Each API integration should use a dedicated API key scoped to its use
+      case. Revoke keys for decommissioned integrations to maintain security
+      and avoid unintended API consumption.
+    action: Quarterly API key audit
+  - name: Monitor Ask Query Usage
+    description: >-
+      Track AI Ask query consumption per user to forecast when plan limits will
+      be reached. Avoid unnecessary upgrades by educating users on when to use
+      Ask versus direct document navigation.
+    action: Monthly usage review
+compliance:
+  - SOC 2 Type II
+  - GDPR
+  - HIPAA (Enterprise plan)
+dataResidency:
+  - EU-based servers
+  - Encryption in transit and at rest
+  - User data not used to train third-party LLMs
