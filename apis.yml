@@ -7,7 +7,7 @@ description: >-
   document creation, and automated knowledge management workflows. The Slite
   Public API provides programmatic access to workspaces using Bearer token
   authentication and follows the OpenAPI v3.0 standard.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/slite/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -31,7 +31,7 @@ apis:
       Manage knowledge base content, users, groups, and leverage AI-powered
       Ask search capabilities via REST endpoints authenticated with a personal
       API key.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.slite.com/
     baseURL: https://api.slite.com/v1
     tags:
