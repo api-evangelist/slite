@@ -64,7 +64,7 @@ common:
     url: https://github.com/sliteteam/slite-api-js-examples
   - type: Blog
     url: https://slite.com/blog
-  - type: Changelog
+  - type: ChangeLog
     url: https://slite.com/changelog
   - type: Status
     url: https://status.slite.com
