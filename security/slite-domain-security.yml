@@ -1,0 +1,25 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: developers.slite.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 20 07:49:53 2026 GMT
+  hsts: null
+- host: api.slite.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 28 16:08:00 2026 GMT
+  hsts: null
+domains:
+- domain: slite.com
+  dnssec: false
+  caa:
+  - 0 issue "sectigo.com"
+  - 0 issuewild "letsencrypt.org"
+  - 0 issuewild "sectigo.com"
+  - 0 issue "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

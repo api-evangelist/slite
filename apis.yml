@@ -52,6 +52,10 @@ apis:
       - FN: Slite Support
         email: support@slite.com
 common:
+  - type: DomainSecurity
+    url: security/slite-domain-security.yml
+  - type: Authentication
+    url: authentication/slite-authentication.yml
   - type: Documentation
     url: https://developers.slite.com/
   - type: OpenAPI

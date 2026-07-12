@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/openapi.json
+summary:
+  types:
+  - http
+schemes:
+- name: bearer
+  type: http
+  scheme: bearer
+  description: API keys can be generated under Settings > API
+  sources:
+  - openapi/openapi.json
