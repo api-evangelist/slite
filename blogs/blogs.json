@@ -2,13 +2,14 @@
   "repo": "slite",
   "feeds": [
     {
-      "source": "https://slite.com/blog",
-      "feed_url": "",
-      "saved": 1,
-      "method": "agent-scrape"
+      "source": "https://github.com/sliteteam/slite-api-js-examples",
+      "feed_url": "https://github.com/sliteteam/slite-api-js-examples",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-06-27T13:10:29Z",
+  "post_count": 3,
+  "fetched": "2026-07-11T11:50:51Z",
   "agent_pulled": "2026-06-27"
 }
