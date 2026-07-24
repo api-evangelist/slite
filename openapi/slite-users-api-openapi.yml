@@ -1,0 +1,284 @@
+openapi: 3.0.0
+info:
+  title: Public Slite api Ask Users API
+  version: '1'
+  description: Access your Slite documents, search, create, update...
+  license:
+    name: private
+  contact:
+    name: Slite
+servers:
+- url: https://api.slite.com/v1
+tags:
+- name: Users
+paths:
+  /users/{userId}:
+    get:
+      operationId: getUserById
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Example 1:
+                  value:
+                    id: userId123
+                    email: john.doe@example.com
+                    displayName: John Doe
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiNotFoundError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Get a user by ID
+      summary: Get user by ID
+      security:
+      - bearer: []
+      parameters:
+      - description: User ID to retrieve
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+      tags:
+      - Users
+  /users:
+    get:
+      operationId: searchUsers
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUsers'
+              examples:
+                Example 1:
+                  value:
+                    users:
+                    - id: userId123
+                      email: john.doe@example.com
+                      displayName: John Doe
+                    - id: userId456
+                      email: jane.doe@example.com
+                      displayName: Jane Doe
+                    total: 2
+                    hasNextPage: false
+                    nextCursor: null
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Search for users by email, name, or username
+      summary: Search users
+      security:
+      - bearer: []
+      parameters:
+      - description: Search query to match against email, display name
+        in: query
+        name: query
+        required: true
+        schema:
+          type: string
+        example: john
+      - description: Include archived users in the search results
+        in: query
+        name: includeArchived
+        required: false
+        schema:
+          type: boolean
+      - description: Cursor to use to continue fetching users
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      tags:
+      - Users
+components:
+  schemas:
+    PaginatedUsers:
+      properties:
+        nextCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page
+        hasNextPage:
+          type: boolean
+          description: Whether there are more results
+        total:
+          type: number
+          format: double
+          description: Total count of users matching the query
+        users:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+          description: List of users
+      required:
+      - nextCursor
+      - hasNextPage
+      - total
+      - users
+      type: object
+    PublicApiNotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Data source not found.
+        id:
+          type: string
+          enum:
+          - root-id-not-found
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+    PublicApiFieldValidationError:
+      properties:
+        details:
+          $ref: '#/components/schemas/FieldErrors'
+        message:
+          type: string
+          enum:
+          - Validation Failed
+          nullable: false
+        id:
+          type: string
+          enum:
+          - field-validation
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+    PublicApiRateLimitError:
+      properties:
+        message:
+          type: string
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+          nullable: false
+        id:
+          type: string
+          enum:
+          - rate-limit
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    User:
+      properties:
+        organizationRole:
+          type: string
+          description: Role of the user in the organization
+        isGuest:
+          type: boolean
+          description: Whether the user is a guest
+        archivedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Whether the user is archived
+        displayName:
+          type: string
+          description: Display name of the user
+        email:
+          type: string
+          description: Email address of the user
+        id:
+          type: string
+          description: User ID
+      required:
+      - displayName
+      - email
+      - id
+      type: object
+    PublicApiError:
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+      required:
+      - message
+      - id
+      type: object
+    PublicApiAuthError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Invalid apiKey
+          nullable: false
+        id:
+          type: string
+          enum:
+          - auth/unauthorized
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      description: API keys can be generated under Settings > API

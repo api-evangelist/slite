@@ -1,0 +1,160 @@
+openapi: 3.0.0
+info:
+  title: Public Slite api Ask Me API
+  version: '1'
+  description: Access your Slite documents, search, create, update...
+  license:
+    name: private
+  contact:
+    name: Slite
+servers:
+- url: https://api.slite.com/v1
+tags:
+- name: Me
+paths:
+  /me:
+    get:
+      operationId: me
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Me'
+              examples:
+                Example 1:
+                  value:
+                    displayName: Jane Doe
+                    organizationName: Example Corp
+                    organizationDomain: example.com
+                    email: jane.doe@example.com
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Return authenticated user information.
+      summary: Return the authenticated user information.
+      security:
+      - bearer: []
+      parameters: []
+      tags:
+      - Me
+components:
+  schemas:
+    Me:
+      properties:
+        email:
+          type: string
+          description: Email address of the authenticated user.
+        organizationDomain:
+          type: string
+          description: Domain of the organization the authenticated user belongs to.
+        organizationName:
+          type: string
+          description: Name of the organization the authenticated user belongs to.
+        displayName:
+          type: string
+          description: Display name of the authenticated user.
+      required:
+      - email
+      - organizationDomain
+      - organizationName
+      - displayName
+      type: object
+    PublicApiFieldValidationError:
+      properties:
+        details:
+          $ref: '#/components/schemas/FieldErrors'
+        message:
+          type: string
+          enum:
+          - Validation Failed
+          nullable: false
+        id:
+          type: string
+          enum:
+          - field-validation
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+    PublicApiRateLimitError:
+      properties:
+        message:
+          type: string
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+          nullable: false
+        id:
+          type: string
+          enum:
+          - rate-limit
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    PublicApiError:
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+      required:
+      - message
+      - id
+      type: object
+    PublicApiAuthError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Invalid apiKey
+          nullable: false
+        id:
+          type: string
+          enum:
+          - auth/unauthorized
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      description: API keys can be generated under Settings > API

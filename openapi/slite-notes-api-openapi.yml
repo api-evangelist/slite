@@ -1,0 +1,1128 @@
+openapi: 3.0.0
+info:
+  title: Public Slite api Ask Notes API
+  version: '1'
+  description: Access your Slite documents, search, create, update...
+  license:
+    name: private
+  contact:
+    name: Slite
+servers:
+- url: https://api.slite.com/v1
+tags:
+- name: Notes
+paths:
+  /notes:
+    get:
+      operationId: listNotes
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedNotes'
+              examples:
+                Example 1:
+                  value:
+                    hasNextPage: false
+                    nextCursor: null
+                    total: 2
+                    notes:
+                    - id: noteId1
+                      createdAt: '2024-01-01T00:00:00.000Z'
+                      updatedAt: '2024-01-01T00:00:00.000Z'
+                      lastEditedAt: '2024-01-02T00:00:00.000Z'
+                      parentNoteId: parentNoteId
+                      title: First note
+                      url: https://slite.slite.com/api/s/noteId1/First-note
+                      archivedAt: null
+                    - id: noteId2
+                      createdAt: '2024-01-01T00:00:00.000Z'
+                      updatedAt: '2024-01-02T00:00:00.000Z'
+                      lastEditedAt: '2024-01-02T00:00:00.000Z'
+                      parentNoteId: parentNoteId
+                      title: Second note
+                      url: https://slite.slite.com/api/s/noteId2/Second-note
+                      archivedAt: null
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: List notes with optional filtering by owner
+      summary: List notes
+      security:
+      - bearer: []
+      parameters:
+      - description: 'Optional: User id to filter notes by owner'
+        in: query
+        name: ownerId
+        required: false
+        schema:
+          type: string
+      - description: 'Optional: filter to only return notes under this parent note id'
+        in: query
+        name: parentNoteId
+        required: false
+        schema:
+          type: string
+      - description: 'Optional: To change the order of the returned notes'
+        in: query
+        name: orderBy
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListNotesOrderBy'
+      - description: Cursor to use to continue fetching notes
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      tags:
+      - Notes
+    post:
+      operationId: createNote
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+              examples:
+                Example 1:
+                  value:
+                    id: noteId
+                    createdAt: '2024-01-01T00:00:00.000Z'
+                    updatedAt: '2024-01-01T00:00:00.000Z'
+                    lastEditedAt: '2024-01-02T00:00:00.000Z'
+                    parentNoteId: parentNoteId
+                    title: Slite interconnection
+                    url: https://slite.slite.com/api/s/noteId/Slite%20interconnection
+                    archivedAt: null
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: 'Create a note from markdown content, with a templateId or just an empty one.
+
+        If no parentNoteId is specified, it will be created in your personal channel.'
+      summary: Create a note
+      security:
+      - bearer: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  description: Title of the note to create
+                  example:
+                  - Note title
+                parentNoteId:
+                  type: string
+                  description: 'Below which other note to create this note.
+
+                    If not specified, the note would be created in your personal channel'
+                  example:
+                  - parentNoteId
+                templateId:
+                  type: string
+                  description: If you want to apply a template to the created note
+                  example:
+                  - templateId
+                markdown:
+                  $ref: '#/components/schemas/Markdown'
+                  description: Either provide Markdown content to fill the note
+                  example:
+                  - '# Content in markdown'
+                html:
+                  $ref: '#/components/schemas/Html'
+                  description: Or you can provide HTML content
+                attributes:
+                  items:
+                    type: string
+                    nullable: true
+                  type: array
+                  description: 'Attributes for the parent collection ordered by column.
+
+                    If they don''t match the appropriate type, they would be ignored'
+              required:
+              - title
+              type: object
+      tags:
+      - Notes
+  /notes/{noteId}:
+    get:
+      operationId: getNoteById
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoteWithContent'
+              examples:
+                Example 1:
+                  value:
+                    id: noteId
+                    parentNoteId: parentNoteId
+                    title: Slite interconnection
+                    createdAt: '2024-01-01T00:00:00.000Z'
+                    updatedAt: '2024-01-01T00:00:00.000Z'
+                    lastEditedAt: '2024-01-02T00:00:00.000Z'
+                    archivedAt: null
+                    url: https://slite.slite.com/api/s/noteId/Slite%20interconnection
+                    content: '
+
+                      # How the public api works?
+
+
+                      The public api consist of few simple REST route exposed via openapi standard.
+
+                      '
+                Example 2:
+                  value:
+                    id: noteIdInACollection
+                    parentNoteId: parentCollectionId
+                    title: Slite collection
+                    createdAt: '2024-01-01T00:00:00.000Z'
+                    updatedAt: '2024-01-01T00:00:00.000Z'
+                    lastEditedAt: '2024-01-02T00:00:00.000Z'
+                    archivedAt: null
+                    url: https://slite.slite.com/api/s/noteId/Slite%20interconnection
+                    content: '
+
+                      # How can we reach the collection attributes?
+
+
+                      They will be returned ordered in an `attributes` array.
+
+                      '
+                    attributes:
+                    - Cycle J
+                    - Done
+                    columns:
+                    - Cycle
+                    - Status
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Return a note by id
+      summary: Return a note
+      security:
+      - bearer: []
+      parameters:
+      - description: Note id to return
+        in: path
+        name: noteId
+        required: true
+        schema:
+          type: string
+      - description: Format of the content to return (Markdown, Html, or SliteML)
+        in: query
+        name: format
+        required: false
+        schema:
+          $ref: '#/components/schemas/NoteContentFormat'
+      tags:
+      - Notes
+    delete:
+      operationId: deleteNoteById
+      responses:
+        '204':
+          description: No content
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Delete a note and its children by id. !!! It's irreversible !!!
+      summary: Delete a note and its children
+      security:
+      - bearer: []
+      parameters:
+      - description: Note id to delete
+        in: path
+        name: noteId
+        required: true
+        schema:
+          type: string
+      tags:
+      - Notes
+    put:
+      operationId: updateNote
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+              examples:
+                Example 1:
+                  value:
+                    id: noteId
+                    createdAt: '2024-01-01T00:00:00.000Z'
+                    updatedAt: '2024-01-01T00:00:00.000Z'
+                    lastEditedAt: '2024-01-02T00:00:00.000Z'
+                    parentNoteId: parentNoteId
+                    title: Slite interconnection
+                    url: https://slite.slite.com/api/s/noteId/Slite%20interconnection
+                    archivedAt: null
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Update note content with markdown and/or title
+      summary: Update a note
+      security:
+      - bearer: []
+      parameters:
+      - description: Note id to update
+        in: path
+        name: noteId
+        required: true
+        schema:
+          type: string
+        example: noteId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  description: Title of the note to update
+                  example:
+                  - New title
+                markdown:
+                  $ref: '#/components/schemas/Markdown'
+                  description: New markdown content to fill the note
+                  example:
+                  - '# New content'
+                html:
+                  $ref: '#/components/schemas/Html'
+                  description: New html content to fill the note
+                attributes:
+                  items:
+                    type: string
+                    nullable: true
+                  type: array
+                  description: 'Attributes for the parent collection ordered by column.
+
+                    If they don''t match the appropriate type, they would be ignored'
+              type: object
+      tags:
+      - Notes
+  /notes/{noteId}/children:
+    get:
+      operationId: getNoteChildren
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedNotes'
+              examples:
+                Example 1:
+                  value:
+                    hasNextPage: false
+                    nextCursor: null
+                    total: 1
+                    notes:
+                    - id: noteId
+                      createdAt: '2024-01-01T00:00:00.000Z'
+                      updatedAt: '2024-01-01T00:00:00.000Z'
+                      lastEditedAt: '2024-01-02T00:00:00.000Z'
+                      parentNoteId: parentNoteId
+                      title: Slite interconnection
+                      url: https://slite.slite.com/api/s/noteId/Slite%20interconnection
+                      archivedAt: null
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Return note children by parent note id
+      summary: Return note children by parent note id
+      security:
+      - bearer: []
+      parameters:
+      - description: Note id to fetch its children
+        in: path
+        name: noteId
+        required: true
+        schema:
+          type: string
+      - description: 'Cursor to use to continue fetching the note children
+
+          It''s only used if current note has more than 50 children'
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      tags:
+      - Notes
+  /notes/{noteId}/verify:
+    put:
+      operationId: verifyNote
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+              examples:
+                Example 1:
+                  value:
+                    id: noteId
+                    createdAt: '2024-01-01T00:00:00.000Z'
+                    updatedAt: '2024-01-01T00:00:00.000Z'
+                    lastEditedAt: '2024-01-02T00:00:00.000Z'
+                    parentNoteId: parentNoteId
+                    title: Slite interconnection
+                    url: https://slite.slite.com/api/s/noteId/Slite%20interconnection
+                    archivedAt: null
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Set Verified status on a note with optional verification expiration
+      summary: Verify a note
+      security:
+      - bearer: []
+      parameters:
+      - description: Note id to update
+        in: path
+        name: noteId
+        required: true
+        schema:
+          type: string
+        example: noteId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                until:
+                  type: string
+                  format: date-time
+                  nullable: true
+                  description: Expiration of the verification status (set null for no expiration)
+                  example:
+                  - '2024-01-01T00:00:00.000Z'
+              required:
+              - until
+              type: object
+      tags:
+      - Notes
+  /notes/{noteId}/flag-as-outdated:
+    put:
+      operationId: flagNoteAsOutdated
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+              examples:
+                Example 1:
+                  value:
+                    id: noteId
+                    createdAt: '2024-01-01T00:00:00.000Z'
+                    updatedAt: '2024-01-01T00:00:00.000Z'
+                    lastEditedAt: '2024-01-02T00:00:00.000Z'
+                    parentNoteId: parentNoteId
+                    title: Slite interconnection
+                    url: https://slite.slite.com/api/s/noteId/Slite%20interconnection
+                    archivedAt: null
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Set Outdated status on a note with optional reason
+      summary: Flag note as outdated
+      security:
+      - bearer: []
+      parameters:
+      - description: Note id to update
+        in: path
+        name: noteId
+        required: true
+        schema:
+          type: string
+        example: noteId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                reason:
+                  type: string
+                  description: Outdated reason
+                  example:
+                  - Information are incorrect
+              required:
+              - reason
+              type: object
+      tags:
+      - Notes
+  /notes/{noteId}/archived:
+    put:
+      operationId: updateNoteArchivedState
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+              examples:
+                Example 1:
+                  value:
+                    id: noteId
+                    createdAt: '2024-01-01T00:00:00.000Z'
+                    updatedAt: '2024-01-01T00:00:00.000Z'
+                    lastEditedAt: '2024-01-02T00:00:00.000Z'
+                    parentNoteId: parentNoteId
+                    title: Slite interconnection
+                    url: https://slite.slite.com/api/s/noteId/Slite%20interconnection
+                    archivedAt: null
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Update the archived state of a note
+      summary: Archive or unarchive a note
+      security:
+      - bearer: []
+      parameters:
+      - description: Note id to update
+        in: path
+        name: noteId
+        required: true
+        schema:
+          type: string
+        example: noteId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                archived:
+                  type: boolean
+                  description: Set to true to archive the note, false to unarchive it
+                  example:
+                  - true
+              required:
+              - archived
+              type: object
+      tags:
+      - Notes
+  /notes/{noteId}/owner:
+    put:
+      operationId: updateNoteOwner
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+              examples:
+                Example 1:
+                  value:
+                    id: noteId
+                    createdAt: '2024-01-01T00:00:00.000Z'
+                    updatedAt: '2024-01-01T00:00:00.000Z'
+                    lastEditedAt: '2024-01-02T00:00:00.000Z'
+                    parentNoteId: parentNoteId
+                    title: Slite interconnection
+                    url: https://slite.slite.com/api/s/noteId/Slite%20interconnection
+                    archivedAt: null
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Update the owner of a note, it can be a user or a group
+      summary: Update note owner
+      security:
+      - bearer: []
+      parameters:
+      - description: Note id to update
+        in: path
+        name: noteId
+        required: true
+        schema:
+          type: string
+        example: noteId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                userId:
+                  type: string
+                  description: User id to set as the owner of the note
+                  example:
+                  - userId
+                groupId:
+                  type: string
+                  description: Group id to set as the owner of the note
+                  example:
+                  - groupId
+              type: object
+      tags:
+      - Notes
+  /notes/{noteId}/tiles/{tileId}:
+    put:
+      operationId: updateTile
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    description: Direct url of the tile in the note
+                required:
+                - url
+                type: object
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: 'Update or create tile.
+
+        A tile is rendered with a structured header and a markdown content.
+
+        You can create a tile by copying a tile id from Slite by clicking on `Copy block id` on an empty line setting in the editor.'
+      summary: Update a tile in a note
+      security:
+      - bearer: []
+      parameters:
+      - description: Note id containing the tile id
+        in: path
+        name: noteId
+        required: true
+        schema:
+          type: string
+        example: noteId
+      - description: Tile id to update
+        in: path
+        name: tileId
+        required: true
+        schema:
+          type: string
+        example: tileId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  nullable: true
+                  description: Title of the tile
+                  example:
+                  - Public api progress
+                iconURL:
+                  type: string
+                  nullable: true
+                  description: Icon URL to show in the tile
+                  example:
+                  - https://assets.slite.com/logos/favicon.ico
+                status:
+                  properties:
+                    colorHex:
+                      type: string
+                      nullable: true
+                      example: '#fcc93c'
+                      pattern: ^#[0-9a-fA-F]{6}$
+                    label:
+                      type: string
+                      description: Content of the status
+                      example: In progress
+                  required:
+                  - label
+                  type: object
+                  nullable: true
+                  description: If needed a tile status can be specified with its color
+                  example:
+                  - label: In progress
+                    colorHex: '#fcc93c'
+                url:
+                  type: string
+                  nullable: true
+                  description: The tile can be linked to an external URL
+                  example:
+                  - https://slite.com/
+                content:
+                  type: string
+                  nullable: true
+                  description: The content of the tile. Can be in markdown.
+                  example:
+                  - '- [ ] Release it to everyone'
+              type: object
+      tags:
+      - Notes
+components:
+  schemas:
+    Note:
+      properties:
+        owner:
+          $ref: '#/components/schemas/NoteOwner'
+          description: 'Owner of the note for review purposes.
+
+            Either userId or groupId will be set, but not both.
+
+            If no owner is set, this field will be omitted.'
+        reviewState:
+          $ref: '#/components/schemas/PublicApiReviewState'
+          description: 'Review state of the note
+
+            Can be Verified, Outdated, VerificationRequested or VerificationExpired'
+        archivedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Date of the archiving of the note (null if not archived)
+        lastEditedAt:
+          type: string
+          format: date-time
+          description: Date of the last edition of the note
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date of the last update of the note
+        createdAt:
+          type: string
+          format: date-time
+          description: Date of the creation of the note
+        columns:
+          items:
+            type: string
+          type: array
+          description: If note is in a collection, it will contain its column names
+        attributes:
+          items:
+            type: string
+          type: array
+          description: 'If note is in a collection, it will contain its attributes ordered
+
+            by column'
+        url:
+          type: string
+          description: Url to the note
+        parentNoteId:
+          type: string
+          nullable: true
+          description: 'Parent note id of the current note.
+
+            It can be null if it''s a root note.'
+        iconColor:
+          type: string
+          nullable: true
+          description: Optional icon color for the note.
+        iconShape:
+          type: string
+          nullable: true
+          description: Optional icon identifier for the note.
+        title:
+          type: string
+          description: Title of the note
+        id:
+          type: string
+          description: Id of the note
+      required:
+      - archivedAt
+      - lastEditedAt
+      - updatedAt
+      - createdAt
+      - url
+      - parentNoteId
+      - title
+      - id
+      type: object
+    PaginatedNotes:
+      properties:
+        notes:
+          items:
+            $ref: '#/components/schemas/Note'
+          type: array
+        total:
+          type: number
+          format: double
+          description: Total number of children
+        hasNextPage:
+          type: boolean
+          description: Is there any other page to fetch
+        nextCursor:
+          type: string
+          nullable: true
+          description: Next cursor to continue fetching the paginate children
+      required:
+      - notes
+      - total
+      - hasNextPage
+      - nextCursor
+      type: object
+    PublicApiReviewState:
+      enum:
+      - Verified
+      - Outdated
+      - VerificationRequested
+      - VerificationExpired
+      type: string
+    Html:
+      type: string
+    Markdown:
+      type: string
+      format: blob
+    PublicApiFieldValidationError:
+      properties:
+        details:
+          $ref: '#/components/schemas/FieldErrors'
+        message:
+          type: string
+          enum:
+          - Validation Failed
+          nullable: false
+        id:
+          type: string
+          enum:
+          - field-validation
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+    PublicApiRateLimitError:
+      properties:
+        message:
+          type: string
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+          nullable: false
+        id:
+          type: string
+          enum:
+          - rate-limit
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+    ListNotesOrderBy:
+      enum:
+      - lastEditedAt_DESC
+      - lastEditedAt_ASC
+      - listPosition_DESC
+      - listPosition_ASC
+      type: string
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    PublicApiError:
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+      required:
+      - message
+      - id
+      type: object
+    PublicApiAuthError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Invalid apiKey
+          nullable: false
+        id:
+          type: string
+          enum:
+          - auth/unauthorized
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+    NoteOwner:
+      properties:
+        groupId:
+          type: string
+          description: Group id of the owner (if owner is a group)
+        userId:
+          type: string
+          description: User id of the owner (if owner is a user)
+      type: object
+      description: 'Owner of the note for review purposes.
+
+        Either userId or groupId will be set, but not both.'
+    NoteWithContent:
+      allOf:
+      - $ref: '#/components/schemas/Note'
+      - properties:
+          content:
+            type: string
+            description: Content of the note in Markdown, Html, or SliteML
+            format: blob
+        required:
+        - content
+        type: object
+    NoteContentFormat:
+      enum:
+      - md
+      - html
+      - sliteml
+      type: string
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      description: API keys can be generated under Settings > API

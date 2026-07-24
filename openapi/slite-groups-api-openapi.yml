@@ -1,0 +1,264 @@
+openapi: 3.0.0
+info:
+  title: Public Slite api Ask Groups API
+  version: '1'
+  description: Access your Slite documents, search, create, update...
+  license:
+    name: private
+  contact:
+    name: Slite
+servers:
+- url: https://api.slite.com/v1
+tags:
+- name: Groups
+paths:
+  /groups/{groupId}:
+    get:
+      operationId: getGroupById
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+              examples:
+                Example 1:
+                  value:
+                    id: groupId123
+                    name: Developers
+                    description: Group for all developer team members
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '404':
+          description: Group not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiNotFoundError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Get a group by ID
+      summary: Get group by ID
+      security:
+      - bearer: []
+      parameters:
+      - description: Group ID to retrieve
+        in: path
+        name: groupId
+        required: true
+        schema:
+          type: string
+      tags:
+      - Groups
+  /groups:
+    get:
+      operationId: searchGroups
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGroups'
+              examples:
+                Example 1:
+                  value:
+                    groups:
+                    - id: groupId123
+                      name: Developers
+                      description: Group for all developer team members
+                    total: 2
+                    hasNextPage: false
+                    nextCursor: null
+        '401':
+          description: Invalid authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiAuthError'
+        '422':
+          description: Input validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiFieldValidationError'
+        '429':
+          description: Rate limitation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiRateLimitError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      description: Search for groups by name
+      summary: Search groups
+      security:
+      - bearer: []
+      parameters:
+      - description: Search query to match against name
+        in: query
+        name: query
+        required: true
+        schema:
+          type: string
+        example: Developers
+      - description: Cursor to use to continue fetching groups
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      tags:
+      - Groups
+components:
+  schemas:
+    PublicApiNotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Data source not found.
+        id:
+          type: string
+          enum:
+          - root-id-not-found
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+    PublicApiFieldValidationError:
+      properties:
+        details:
+          $ref: '#/components/schemas/FieldErrors'
+        message:
+          type: string
+          enum:
+          - Validation Failed
+          nullable: false
+        id:
+          type: string
+          enum:
+          - field-validation
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+    Group:
+      properties:
+        description:
+          type: string
+          description: Description of the group
+        name:
+          type: string
+          description: Group name
+        id:
+          type: string
+          description: Group ID
+      required:
+      - description
+      - name
+      - id
+      type: object
+    PublicApiRateLimitError:
+      properties:
+        message:
+          type: string
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+          nullable: false
+        id:
+          type: string
+          enum:
+          - rate-limit
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    PublicApiError:
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+      required:
+      - message
+      - id
+      type: object
+    PaginatedGroups:
+      properties:
+        nextCursor:
+          type: string
+          nullable: true
+          description: Cursor for the next page
+        hasNextPage:
+          type: boolean
+          description: Whether there are more results
+        total:
+          type: number
+          format: double
+          description: Total count of groups matching the query
+        groups:
+          items:
+            $ref: '#/components/schemas/Group'
+          type: array
+          description: List of groups
+      required:
+      - nextCursor
+      - hasNextPage
+      - total
+      - groups
+      type: object
+    PublicApiAuthError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Invalid apiKey
+          nullable: false
+        id:
+          type: string
+          enum:
+          - auth/unauthorized
+          nullable: false
+      required:
+      - message
+      - id
+      type: object
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      description: API keys can be generated under Settings > API
