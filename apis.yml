@@ -7,7 +7,20 @@ description: >-
   document creation, and automated knowledge management workflows. The Slite
   Public API provides programmatic access to workspaces using Bearer token
   authentication and follows the OpenAPI v3.0 standard.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/slite.png
 url: https://raw.githubusercontent.com/api-evangelist/slite/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -23,34 +36,104 @@ tags:
   - AI
   - Search
 apis:
-  - aid: slite:slite-api
-    name: Slite API
-    description: >-
-      The Slite Public API provides programmatic access to your workspace
-      enabling you to create, update, search, and delete notes and documents.
-      Manage knowledge base content, users, groups, and leverage AI-powered
-      Ask search capabilities via REST endpoints authenticated with a personal
-      API key.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.slite.com/
-    baseURL: https://api.slite.com/v1
-    tags:
-      - Notes
-      - Documents
-      - Search
-      - Knowledge Management
-      - Users
-      - Groups
-    properties:
-      - type: Documentation
-        url: https://developers.slite.com/docs/getting-started
-      - type: OpenAPI
-        url: https://api.slite.com/openapi.json
-      - type: Authentication
-        url: https://developers.slite.com/docs/getting-started
-    contact:
-      - FN: Slite Support
-        email: support@slite.com
+- aid: slite:slite-ask-api
+  name: Slite Ask API
+  description: The Ask API from Slite — 2 operation(s) for ask.
+  humanURL: https://developers.slite.com/
+  baseURL: https://api.slite.com/v1
+  tags:
+  - Ask
+  properties:
+  - type: OpenAPI
+    url: openapi/slite-ask-api-openapi.yml
+  - type: Documentation
+    url: https://developers.slite.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.slite.com/docs/getting-started
+- aid: slite:slite-groups-api
+  name: Slite Groups API
+  description: The Groups API from Slite — 2 operation(s) for groups.
+  humanURL: https://developers.slite.com/
+  baseURL: https://api.slite.com/v1
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/slite-groups-api-openapi.yml
+  - type: Documentation
+    url: https://developers.slite.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.slite.com/docs/getting-started
+- aid: slite:slite-knowledge-management-api
+  name: Slite Knowledge Management API
+  description: The Knowledge Management API from Slite — 4 operation(s) for knowledge management.
+  humanURL: https://developers.slite.com/
+  baseURL: https://api.slite.com/v1
+  tags:
+  - Knowledge Management
+  properties:
+  - type: OpenAPI
+    url: openapi/slite-knowledge-management-api-openapi.yml
+  - type: Documentation
+    url: https://developers.slite.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.slite.com/docs/getting-started
+- aid: slite:slite-me-api
+  name: Slite Me API
+  description: The Me API from Slite — 1 operation(s) for me.
+  humanURL: https://developers.slite.com/
+  baseURL: https://api.slite.com/v1
+  tags:
+  - Me
+  properties:
+  - type: OpenAPI
+    url: openapi/slite-me-api-openapi.yml
+  - type: Documentation
+    url: https://developers.slite.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.slite.com/docs/getting-started
+- aid: slite:slite-notes-api
+  name: Slite Notes API
+  description: The Notes API from Slite — 8 operation(s) for notes.
+  humanURL: https://developers.slite.com/
+  baseURL: https://api.slite.com/v1
+  tags:
+  - Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/slite-notes-api-openapi.yml
+  - type: Documentation
+    url: https://developers.slite.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.slite.com/docs/getting-started
+- aid: slite:slite-search-notes-api
+  name: Slite Search Notes API
+  description: The Search Notes API from Slite — 1 operation(s) for search notes.
+  humanURL: https://developers.slite.com/
+  baseURL: https://api.slite.com/v1
+  tags:
+  - Search Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/slite-search-notes-api-openapi.yml
+  - type: Documentation
+    url: https://developers.slite.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.slite.com/docs/getting-started
+- aid: slite:slite-users-api
+  name: Slite Users API
+  description: The Users API from Slite — 2 operation(s) for users.
+  humanURL: https://developers.slite.com/
+  baseURL: https://api.slite.com/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/slite-users-api-openapi.yml
+  - type: Documentation
+    url: https://developers.slite.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.slite.com/docs/getting-started
 common:
   - type: AgenticAccess
     url: agentic-access/slite-agentic-access.yml
