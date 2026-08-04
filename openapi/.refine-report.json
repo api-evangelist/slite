@@ -1,0 +1,26 @@
+{
+  "provider": "slite",
+  "sources": [
+    "slite-ask-api-openapi.yml",
+    "slite-groups-api-openapi.yml",
+    "slite-knowledge-management-api-openapi.yml",
+    "slite-me-api-openapi.yml",
+    "slite-notes-api-openapi.yml",
+    "slite-search-notes-api-openapi.yml",
+    "slite-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "slite-ask-api-openapi.yml",
+    "slite-groups-api-openapi.yml",
+    "slite-knowledge-management-api-openapi.yml",
+    "slite-me-api-openapi.yml",
+    "slite-notes-api-openapi.yml",
+    "slite-search-notes-api-openapi.yml",
+    "slite-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
