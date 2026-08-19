@@ -1,0 +1,206 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Slite api Ask Knowledge Management API",
+    "version": "1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Knowledge Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List notes for knowledge management",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/knowledge-management/notes",
+            "params": [
+              {
+                "name": "reviewStateList",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to only return notes in special review states."
+              },
+              {
+                "name": "ownerIdList",
+                "value": "",
+                "type": "query",
+                "description": "Optional: user or group ids to filter notes by owner"
+              },
+              {
+                "name": "channelIdList",
+                "value": "",
+                "type": "query",
+                "description": "Optional: channel ids to filter notes by channel"
+              },
+              {
+                "name": "sinceDaysAgo",
+                "value": "",
+                "type": "query",
+                "description": "Optional: number of trailing days to consider"
+              },
+              {
+                "name": "first",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of notes to return. Defaults to 20."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor to use to continue fetching notes"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List notes for knowledge management."
+        },
+        {
+          "info": {
+            "name": "List public notes for knowledge management",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/knowledge-management/notes/public",
+            "params": [
+              {
+                "name": "reviewStateList",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to only return notes in special review states."
+              },
+              {
+                "name": "ownerIdList",
+                "value": "",
+                "type": "query",
+                "description": "Optional: user or group ids to filter notes by owner"
+              },
+              {
+                "name": "channelIdList",
+                "value": "",
+                "type": "query",
+                "description": "Optional: channel ids to filter notes by channel"
+              },
+              {
+                "name": "sinceDaysAgo",
+                "value": "",
+                "type": "query",
+                "description": "Optional: number of trailing days to consider"
+              },
+              {
+                "name": "first",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of notes to return. Defaults to 20."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor to use to continue fetching notes"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List public notes for knowledge management."
+        },
+        {
+          "info": {
+            "name": "List inactive notes for knowledge management",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/knowledge-management/notes/inactive",
+            "params": [
+              {
+                "name": "ownerIdList",
+                "value": "",
+                "type": "query",
+                "description": "Optional: user or group ids to filter notes by owner"
+              },
+              {
+                "name": "channelIdList",
+                "value": "",
+                "type": "query",
+                "description": "Optional: channel ids to filter notes by channel"
+              },
+              {
+                "name": "first",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of notes to return. Defaults to 20."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor to use to continue fetching notes"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List inactive notes for knowledge management."
+        },
+        {
+          "info": {
+            "name": "List empty notes for knowledge management",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/knowledge-management/notes/empty",
+            "params": [
+              {
+                "name": "ownerIdList",
+                "value": "",
+                "type": "query",
+                "description": "Optional: user or group ids to filter notes by owner"
+              },
+              {
+                "name": "channelIdList",
+                "value": "",
+                "type": "query",
+                "description": "Optional: channel ids to filter notes by channel"
+              },
+              {
+                "name": "first",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of notes to return. Defaults to 20."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor to use to continue fetching notes"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List empty notes for knowledge management."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

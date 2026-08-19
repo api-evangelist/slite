@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Slite api Ask Me API",
+    "version": "1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Me",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return the authenticated user information.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/me",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return authenticated user information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,530 @@
+{
+  "item": [
+    {
+      "id": "963fa013-067a-4dcb-8921-48f0473e0cb7",
+      "name": "Search Notes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "184cf5de-6488-4533-b570-6f125ba34748",
+          "name": "Search notes",
+          "request": {
+            "name": "Search notes",
+            "description": {
+              "content": "Search notes based on a query.\nThe scope of the notes is restricted to the authenticated user.\nVarious optional filters are available to restrict the scope of the search even more.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search-notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Query used to perform the note search, default to empty string"
+                },
+                {
+                  "disabled": false,
+                  "key": "parentNoteId",
+                  "value": "<string>",
+                  "description": "Optional filter to only return notes under this parent note id"
+                },
+                {
+                  "disabled": false,
+                  "key": "depth",
+                  "value": "<double>",
+                  "description": "Optional filter to only return notes with a depth (number of parents) equal to a specified value"
+                },
+                {
+                  "disabled": false,
+                  "key": "reviewState",
+                  "value": "<string>",
+                  "description": "Optional filter to return notes in a special review state\nCan be Verified, Outdated, VerificationRequested or VerificationExpired"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Used to perform pagination on search"
+                },
+                {
+                  "disabled": false,
+                  "key": "hitsPerPage",
+                  "value": "<integer>",
+                  "description": "Specify how many notes to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "highlightPreTag",
+                  "value": "<string>",
+                  "description": "Inject a tag before the matching query"
+                },
+                {
+                  "disabled": false,
+                  "key": "highlightPostTag",
+                  "value": "<string>",
+                  "description": "Inject a tag after the matching query"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeArchived",
+                  "value": "<boolean>",
+                  "description": "Optional filter to also include archived notes in the search results (default to false)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "804834a0-9009-43da-b900-bd99613ce210",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search-notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "Slite public api"
+                    },
+                    {
+                      "key": "parentNoteId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "reviewState",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "hitsPerPage",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "highlightPreTag",
+                      "value": "<b>"
+                    },
+                    {
+                      "key": "highlightPostTag",
+                      "value": "</b>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nbPages\": 2,\n  \"page\": 0,\n  \"hits\": [\n    {\n      \"lastEditedAt\": \"2021-01-02T00:00:00.000Z\",\n      \"highlight\": \"...easily connect Slite to your own process, you can use <b>Slite public api</b> to perform search...\",\n      \"id\": \"noteId\",\n      \"title\": \"Slite interconnection\",\n      \"type\": \"rich_text\",\n      \"updatedAt\": \"2021-01-01T00:00:00.000Z\",\n      \"archivedAt\": null,\n      \"parentNotes\": [\n        {\n          \"id\": \"channelId\",\n          \"title\": \"Channel\"\n        },\n        {\n          \"id\": \"parentId\",\n          \"title\": \"Parent note\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77c9939e-19c1-4c4e-8a14-09d0c69ab41d",
+              "name": "Invalid authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search-notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "Slite public api"
+                    },
+                    {
+                      "key": "parentNoteId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "reviewState",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "hitsPerPage",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "highlightPreTag",
+                      "value": "<b>"
+                    },
+                    {
+                      "key": "highlightPostTag",
+                      "value": "</b>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid apiKey\",\n  \"id\": \"auth/unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93874513-7705-457b-bced-0c1e3d335d0f",
+              "name": "Input validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search-notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "Slite public api"
+                    },
+                    {
+                      "key": "parentNoteId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "reviewState",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "hitsPerPage",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "highlightPreTag",
+                      "value": "<b>"
+                    },
+                    {
+                      "key": "highlightPostTag",
+                      "value": "</b>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation Failed\",\n  \"id\": \"field-validation\",\n  \"details\": {\n    \"key_0\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "946dd22c-bab7-47e1-8b0f-77b3128fdb03",
+              "name": "Rate limitation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search-notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "Slite public api"
+                    },
+                    {
+                      "key": "parentNoteId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "reviewState",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "hitsPerPage",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "highlightPreTag",
+                      "value": "<b>"
+                    },
+                    {
+                      "key": "highlightPostTag",
+                      "value": "</b>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"You've reached the api rate limit. Please wait and retry later.\",\n  \"id\": \"rate-limit\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1d13a8c-acfb-4c3e-8c7e-e07cb54f426f",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search-notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "Slite public api"
+                    },
+                    {
+                      "key": "parentNoteId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "reviewState",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "hitsPerPage",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "highlightPreTag",
+                      "value": "<b>"
+                    },
+                    {
+                      "key": "highlightPostTag",
+                      "value": "</b>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.slite.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7e8b8f24-79ea-48f0-ae7e-cd1821b6fbcb",
+    "name": "Public Slite api Ask Search Notes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access your Slite documents, search, create, update...\n\nContact Support:\n Name: Slite",
+      "type": "text/plain"
+    }
+  }
+}

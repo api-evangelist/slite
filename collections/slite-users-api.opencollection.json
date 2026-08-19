@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Slite api Ask Users API",
+    "version": "1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get user by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User ID to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a user by ID"
+        },
+        {
+          "info": {
+            "name": "Search users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/users",
+            "params": [
+              {
+                "name": "query",
+                "value": "john",
+                "type": "query",
+                "description": "Search query to match against email, display name"
+              },
+              {
+                "name": "includeArchived",
+                "value": "",
+                "type": "query",
+                "description": "Include archived users in the search results"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor to use to continue fetching users"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Search for users by email, name, or username"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

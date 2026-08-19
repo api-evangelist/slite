@@ -1,0 +1,327 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Slite api Ask Notes API",
+    "version": "1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/notes",
+            "params": [
+              {
+                "name": "ownerId",
+                "value": "",
+                "type": "query",
+                "description": "Optional: User id to filter notes by owner"
+              },
+              {
+                "name": "parentNoteId",
+                "value": "",
+                "type": "query",
+                "description": "Optional: filter to only return notes under this parent note id"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Optional: To change the order of the returned notes"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor to use to continue fetching notes"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List notes with optional filtering by owner"
+        },
+        {
+          "info": {
+            "name": "Create a note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.slite.com/v1/notes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a note from markdown content, with a templateId or just an empty one.\nIf no parentNoteId is specified, it will be created in your personal channel."
+        },
+        {
+          "info": {
+            "name": "Return a note",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/notes/:noteId",
+            "params": [
+              {
+                "name": "noteId",
+                "value": "",
+                "type": "path",
+                "description": "Note id to return"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Format of the content to return (Markdown, Html, or SliteML)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return a note by id"
+        },
+        {
+          "info": {
+            "name": "Update a note",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.slite.com/v1/notes/:noteId",
+            "params": [
+              {
+                "name": "noteId",
+                "value": "noteId",
+                "type": "path",
+                "description": "Note id to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update note content with markdown and/or title"
+        },
+        {
+          "info": {
+            "name": "Delete a note and its children",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.slite.com/v1/notes/:noteId",
+            "params": [
+              {
+                "name": "noteId",
+                "value": "",
+                "type": "path",
+                "description": "Note id to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a note and its children by id. !!! It's irreversible !!!"
+        },
+        {
+          "info": {
+            "name": "Return note children by parent note id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/notes/:noteId/children",
+            "params": [
+              {
+                "name": "noteId",
+                "value": "",
+                "type": "path",
+                "description": "Note id to fetch its children"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor to use to continue fetching the note children\nIt's only used if current note has more than 50 children"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return note children by parent note id"
+        },
+        {
+          "info": {
+            "name": "Verify a note",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.slite.com/v1/notes/:noteId/verify",
+            "params": [
+              {
+                "name": "noteId",
+                "value": "noteId",
+                "type": "path",
+                "description": "Note id to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set Verified status on a note with optional verification expiration"
+        },
+        {
+          "info": {
+            "name": "Flag note as outdated",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.slite.com/v1/notes/:noteId/flag-as-outdated",
+            "params": [
+              {
+                "name": "noteId",
+                "value": "noteId",
+                "type": "path",
+                "description": "Note id to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set Outdated status on a note with optional reason"
+        },
+        {
+          "info": {
+            "name": "Archive or unarchive a note",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.slite.com/v1/notes/:noteId/archived",
+            "params": [
+              {
+                "name": "noteId",
+                "value": "noteId",
+                "type": "path",
+                "description": "Note id to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the archived state of a note"
+        },
+        {
+          "info": {
+            "name": "Update note owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.slite.com/v1/notes/:noteId/owner",
+            "params": [
+              {
+                "name": "noteId",
+                "value": "noteId",
+                "type": "path",
+                "description": "Note id to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the owner of a note, it can be a user or a group"
+        },
+        {
+          "info": {
+            "name": "Update a tile in a note",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.slite.com/v1/notes/:noteId/tiles/:tileId",
+            "params": [
+              {
+                "name": "noteId",
+                "value": "noteId",
+                "type": "path",
+                "description": "Note id containing the tile id"
+              },
+              {
+                "name": "tileId",
+                "value": "tileId",
+                "type": "path",
+                "description": "Tile id to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update or create tile.\nA tile is rendered with a structured header and a markdown content.\nYou can create a tile by copying a tile id from Slite by clicking on `Copy block id` on an empty line setting in the editor."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

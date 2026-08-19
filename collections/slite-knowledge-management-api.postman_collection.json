@@ -1,0 +1,1910 @@
+{
+  "item": [
+    {
+      "id": "ec9d4344-10cb-4841-8f3a-fdd7bf736719",
+      "name": "Knowledge Management",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3bcb4f3a-beaa-49b4-96c5-f82ec23bce76",
+          "name": "List notes for knowledge management",
+          "request": {
+            "name": "List notes for knowledge management",
+            "description": {
+              "content": "List notes for knowledge management.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "knowledge-management",
+                "notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "reviewStateList",
+                  "value": "<string>",
+                  "description": "Optional filter to only return notes in special review states."
+                },
+                {
+                  "disabled": false,
+                  "key": "reviewStateList",
+                  "value": "<string>",
+                  "description": "Optional filter to only return notes in special review states."
+                },
+                {
+                  "disabled": false,
+                  "key": "ownerIdList",
+                  "value": "<string>",
+                  "description": "Optional: user or group ids to filter notes by owner"
+                },
+                {
+                  "disabled": false,
+                  "key": "ownerIdList",
+                  "value": "<string>",
+                  "description": "Optional: user or group ids to filter notes by owner"
+                },
+                {
+                  "disabled": false,
+                  "key": "channelIdList",
+                  "value": "<string>",
+                  "description": "Optional: channel ids to filter notes by channel"
+                },
+                {
+                  "disabled": false,
+                  "key": "channelIdList",
+                  "value": "<string>",
+                  "description": "Optional: channel ids to filter notes by channel"
+                },
+                {
+                  "disabled": false,
+                  "key": "sinceDaysAgo",
+                  "value": "<double>",
+                  "description": "Optional: number of trailing days to consider"
+                },
+                {
+                  "disabled": false,
+                  "key": "first",
+                  "value": "<integer>",
+                  "description": "Maximum number of notes to return. Defaults to 20."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Cursor to use to continue fetching notes"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2fda1d86-c28e-48d7-841c-934cab6c348d",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sinceDaysAgo",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"notes\": [\n    {\n      \"archivedAt\": \"1954-12-01T06:47:31.879Z\",\n      \"lastEditedAt\": \"1987-12-07T21:00:09.827Z\",\n      \"updatedAt\": \"1986-06-10T03:25:26.994Z\",\n      \"createdAt\": \"1975-11-25T07:27:59.188Z\",\n      \"url\": \"string\",\n      \"parentNoteId\": \"string\",\n      \"title\": \"string\",\n      \"id\": \"string\",\n      \"owner\": {\n        \"groupId\": \"string\",\n        \"userId\": \"string\"\n      },\n      \"reviewState\": \"<string>\",\n      \"columns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"iconColor\": \"string\",\n      \"iconShape\": \"string\"\n    },\n    {\n      \"archivedAt\": \"1985-11-08T03:42:43.364Z\",\n      \"lastEditedAt\": \"2013-08-30T13:38:49.553Z\",\n      \"updatedAt\": \"1962-11-19T23:50:00.065Z\",\n      \"createdAt\": \"1961-07-13T13:48:20.139Z\",\n      \"url\": \"string\",\n      \"parentNoteId\": \"string\",\n      \"title\": \"string\",\n      \"id\": \"string\",\n      \"owner\": {\n        \"groupId\": \"string\",\n        \"userId\": \"string\"\n      },\n      \"reviewState\": \"<string>\",\n      \"columns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"iconColor\": \"string\",\n      \"iconShape\": \"string\"\n    }\n  ],\n  \"total\": 5655.49952740241,\n  \"hasNextPage\": true,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9b8151d-b146-4491-abc2-c78b461f63f5",
+              "name": "Invalid authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sinceDaysAgo",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid apiKey\",\n  \"id\": \"auth/unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c55d2dfd-adf7-4f4a-b027-31f6a3e02d44",
+              "name": "Input validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sinceDaysAgo",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation Failed\",\n  \"id\": \"field-validation\",\n  \"details\": {\n    \"key_0\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_1\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a53f49a2-f66c-420a-87bb-b4c971843380",
+              "name": "Rate limitation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sinceDaysAgo",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"You've reached the api rate limit. Please wait and retry later.\",\n  \"id\": \"rate-limit\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc82bcb2-addc-47e9-9f56-0995fb150610",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sinceDaysAgo",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbe23e6a-80ec-4688-81b7-be4b412f4125",
+          "name": "List public notes for knowledge management",
+          "request": {
+            "name": "List public notes for knowledge management",
+            "description": {
+              "content": "List public notes for knowledge management.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "knowledge-management",
+                "notes",
+                "public"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "reviewStateList",
+                  "value": "<string>",
+                  "description": "Optional filter to only return notes in special review states."
+                },
+                {
+                  "disabled": false,
+                  "key": "reviewStateList",
+                  "value": "<string>",
+                  "description": "Optional filter to only return notes in special review states."
+                },
+                {
+                  "disabled": false,
+                  "key": "ownerIdList",
+                  "value": "<string>",
+                  "description": "Optional: user or group ids to filter notes by owner"
+                },
+                {
+                  "disabled": false,
+                  "key": "ownerIdList",
+                  "value": "<string>",
+                  "description": "Optional: user or group ids to filter notes by owner"
+                },
+                {
+                  "disabled": false,
+                  "key": "channelIdList",
+                  "value": "<string>",
+                  "description": "Optional: channel ids to filter notes by channel"
+                },
+                {
+                  "disabled": false,
+                  "key": "channelIdList",
+                  "value": "<string>",
+                  "description": "Optional: channel ids to filter notes by channel"
+                },
+                {
+                  "disabled": false,
+                  "key": "sinceDaysAgo",
+                  "value": "<double>",
+                  "description": "Optional: number of trailing days to consider"
+                },
+                {
+                  "disabled": false,
+                  "key": "first",
+                  "value": "<integer>",
+                  "description": "Maximum number of notes to return. Defaults to 20."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Cursor to use to continue fetching notes"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "08b0a07f-aa9c-46ea-a1be-cf2bb345494b",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "public"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sinceDaysAgo",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"notes\": [\n    {\n      \"archivedAt\": \"1967-04-19T17:26:46.583Z\",\n      \"lastEditedAt\": \"2007-10-02T03:49:28.241Z\",\n      \"updatedAt\": \"1956-05-09T03:56:35.600Z\",\n      \"createdAt\": \"2011-12-31T15:06:53.161Z\",\n      \"url\": \"string\",\n      \"parentNoteId\": \"string\",\n      \"title\": \"string\",\n      \"id\": \"string\",\n      \"owner\": {\n        \"groupId\": \"string\",\n        \"userId\": \"string\"\n      },\n      \"reviewState\": \"<string>\",\n      \"columns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"iconColor\": \"string\",\n      \"iconShape\": \"string\"\n    },\n    {\n      \"archivedAt\": \"2017-03-22T22:03:07.521Z\",\n      \"lastEditedAt\": \"1983-09-06T03:53:05.028Z\",\n      \"updatedAt\": \"1987-05-21T17:08:50.496Z\",\n      \"createdAt\": \"1989-02-10T23:18:44.598Z\",\n      \"url\": \"string\",\n      \"parentNoteId\": \"string\",\n      \"title\": \"string\",\n      \"id\": \"string\",\n      \"owner\": {\n        \"groupId\": \"string\",\n        \"userId\": \"string\"\n      },\n      \"reviewState\": \"<string>\",\n      \"columns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"iconColor\": \"string\",\n      \"iconShape\": \"string\"\n    }\n  ],\n  \"total\": 922.1284896252324,\n  \"hasNextPage\": true,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c93a65d-51e9-480a-a182-6f0254f94592",
+              "name": "Invalid authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "public"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sinceDaysAgo",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid apiKey\",\n  \"id\": \"auth/unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16141523-2060-44a5-9800-5f42f6aad94e",
+              "name": "Input validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "public"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sinceDaysAgo",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation Failed\",\n  \"id\": \"field-validation\",\n  \"details\": {\n    \"key_0\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_1\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a6ecff5-80d7-4d1d-8b6a-957dac8c3262",
+              "name": "Rate limitation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "public"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sinceDaysAgo",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"You've reached the api rate limit. Please wait and retry later.\",\n  \"id\": \"rate-limit\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9ec753b-92e8-4eaa-b29a-8845e38ef640",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "public"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reviewStateList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sinceDaysAgo",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af65e0ef-c472-4db4-82f2-f5e1d4b112f4",
+          "name": "List inactive notes for knowledge management",
+          "request": {
+            "name": "List inactive notes for knowledge management",
+            "description": {
+              "content": "List inactive notes for knowledge management.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "knowledge-management",
+                "notes",
+                "inactive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ownerIdList",
+                  "value": "<string>",
+                  "description": "Optional: user or group ids to filter notes by owner"
+                },
+                {
+                  "disabled": false,
+                  "key": "ownerIdList",
+                  "value": "<string>",
+                  "description": "Optional: user or group ids to filter notes by owner"
+                },
+                {
+                  "disabled": false,
+                  "key": "channelIdList",
+                  "value": "<string>",
+                  "description": "Optional: channel ids to filter notes by channel"
+                },
+                {
+                  "disabled": false,
+                  "key": "channelIdList",
+                  "value": "<string>",
+                  "description": "Optional: channel ids to filter notes by channel"
+                },
+                {
+                  "disabled": false,
+                  "key": "first",
+                  "value": "<integer>",
+                  "description": "Maximum number of notes to return. Defaults to 20."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Cursor to use to continue fetching notes"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "860b6f7f-c752-4f49-be73-789696f5ee66",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "inactive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"notes\": [\n    {\n      \"archivedAt\": \"1967-04-19T17:26:46.583Z\",\n      \"lastEditedAt\": \"2007-10-02T03:49:28.241Z\",\n      \"updatedAt\": \"1956-05-09T03:56:35.600Z\",\n      \"createdAt\": \"2011-12-31T15:06:53.161Z\",\n      \"url\": \"string\",\n      \"parentNoteId\": \"string\",\n      \"title\": \"string\",\n      \"id\": \"string\",\n      \"owner\": {\n        \"groupId\": \"string\",\n        \"userId\": \"string\"\n      },\n      \"reviewState\": \"<string>\",\n      \"columns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"iconColor\": \"string\",\n      \"iconShape\": \"string\"\n    },\n    {\n      \"archivedAt\": \"2017-03-22T22:03:07.521Z\",\n      \"lastEditedAt\": \"1983-09-06T03:53:05.028Z\",\n      \"updatedAt\": \"1987-05-21T17:08:50.496Z\",\n      \"createdAt\": \"1989-02-10T23:18:44.598Z\",\n      \"url\": \"string\",\n      \"parentNoteId\": \"string\",\n      \"title\": \"string\",\n      \"id\": \"string\",\n      \"owner\": {\n        \"groupId\": \"string\",\n        \"userId\": \"string\"\n      },\n      \"reviewState\": \"<string>\",\n      \"columns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"iconColor\": \"string\",\n      \"iconShape\": \"string\"\n    }\n  ],\n  \"total\": 922.1284896252324,\n  \"hasNextPage\": true,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a85652f1-901f-4ffc-9be1-ef5703e55d9d",
+              "name": "Invalid authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "inactive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid apiKey\",\n  \"id\": \"auth/unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9221acc-79a6-47ce-a07f-f0ca0fee2d82",
+              "name": "Input validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "inactive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation Failed\",\n  \"id\": \"field-validation\",\n  \"details\": {\n    \"key_0\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_1\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efab3108-ccd1-46f9-87f5-ddde83250bc8",
+              "name": "Rate limitation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "inactive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"You've reached the api rate limit. Please wait and retry later.\",\n  \"id\": \"rate-limit\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eeeeb5b8-516d-4635-8c2b-a04f6716b0ea",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "inactive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ff3663d-790b-46dc-b971-6204fd29aa8e",
+          "name": "List empty notes for knowledge management",
+          "request": {
+            "name": "List empty notes for knowledge management",
+            "description": {
+              "content": "List empty notes for knowledge management.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "knowledge-management",
+                "notes",
+                "empty"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ownerIdList",
+                  "value": "<string>",
+                  "description": "Optional: user or group ids to filter notes by owner"
+                },
+                {
+                  "disabled": false,
+                  "key": "ownerIdList",
+                  "value": "<string>",
+                  "description": "Optional: user or group ids to filter notes by owner"
+                },
+                {
+                  "disabled": false,
+                  "key": "channelIdList",
+                  "value": "<string>",
+                  "description": "Optional: channel ids to filter notes by channel"
+                },
+                {
+                  "disabled": false,
+                  "key": "channelIdList",
+                  "value": "<string>",
+                  "description": "Optional: channel ids to filter notes by channel"
+                },
+                {
+                  "disabled": false,
+                  "key": "first",
+                  "value": "<integer>",
+                  "description": "Maximum number of notes to return. Defaults to 20."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Cursor to use to continue fetching notes"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6fbc97b0-53e9-45c9-a88b-ef8103e1963f",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "empty"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"notes\": [\n    {\n      \"archivedAt\": \"1967-04-19T17:26:46.583Z\",\n      \"lastEditedAt\": \"2007-10-02T03:49:28.241Z\",\n      \"updatedAt\": \"1956-05-09T03:56:35.600Z\",\n      \"createdAt\": \"2011-12-31T15:06:53.161Z\",\n      \"url\": \"string\",\n      \"parentNoteId\": \"string\",\n      \"title\": \"string\",\n      \"id\": \"string\",\n      \"owner\": {\n        \"groupId\": \"string\",\n        \"userId\": \"string\"\n      },\n      \"reviewState\": \"<string>\",\n      \"columns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"iconColor\": \"string\",\n      \"iconShape\": \"string\"\n    },\n    {\n      \"archivedAt\": \"2017-03-22T22:03:07.521Z\",\n      \"lastEditedAt\": \"1983-09-06T03:53:05.028Z\",\n      \"updatedAt\": \"1987-05-21T17:08:50.496Z\",\n      \"createdAt\": \"1989-02-10T23:18:44.598Z\",\n      \"url\": \"string\",\n      \"parentNoteId\": \"string\",\n      \"title\": \"string\",\n      \"id\": \"string\",\n      \"owner\": {\n        \"groupId\": \"string\",\n        \"userId\": \"string\"\n      },\n      \"reviewState\": \"<string>\",\n      \"columns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"iconColor\": \"string\",\n      \"iconShape\": \"string\"\n    }\n  ],\n  \"total\": 922.1284896252324,\n  \"hasNextPage\": true,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6114bfb3-e783-4940-953f-8d7e423a2296",
+              "name": "Invalid authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "empty"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid apiKey\",\n  \"id\": \"auth/unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "167b14af-4f57-45e0-867f-abe8320c5580",
+              "name": "Input validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "empty"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation Failed\",\n  \"id\": \"field-validation\",\n  \"details\": {\n    \"key_0\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_1\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14542df3-daf5-4a5e-a7ef-104c23e7c008",
+              "name": "Rate limitation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "empty"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"You've reached the api rate limit. Please wait and retry later.\",\n  \"id\": \"rate-limit\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c2d79fc-9912-4f6e-b9fa-33eb1e878980",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "knowledge-management",
+                    "notes",
+                    "empty"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ownerIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "channelIdList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.slite.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9f6c16bc-8ffd-4ae8-852c-4bbbb746a67c",
+    "name": "Public Slite api Ask Knowledge Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access your Slite documents, search, create, update...\n\nContact Support:\n Name: Slite",
+      "type": "text/plain"
+    }
+  }
+}

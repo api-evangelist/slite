@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Slite api Ask Search Notes API",
+    "version": "1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search Notes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/search-notes",
+            "params": [
+              {
+                "name": "query",
+                "value": "Slite public api",
+                "type": "query",
+                "description": "Query used to perform the note search, default to empty string"
+              },
+              {
+                "name": "parentNoteId",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to only return notes under this parent note id"
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to only return notes with a depth (number of parents) equal to a specified value"
+              },
+              {
+                "name": "reviewState",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to return notes in a special review state\nCan be Verified, Outdated, VerificationRequested or VerificationExpired"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Used to perform pagination on search"
+              },
+              {
+                "name": "hitsPerPage",
+                "value": "",
+                "type": "query",
+                "description": "Specify how many notes to return per page"
+              },
+              {
+                "name": "highlightPreTag",
+                "value": "<b>",
+                "type": "query",
+                "description": "Inject a tag before the matching query"
+              },
+              {
+                "name": "highlightPostTag",
+                "value": "</b>",
+                "type": "query",
+                "description": "Inject a tag after the matching query"
+              },
+              {
+                "name": "lastEditedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to only return notes edited after a specific date"
+              },
+              {
+                "name": "lastUpdatedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to only return notes where metadata has changed after a specific date"
+              },
+              {
+                "name": "includeArchived",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to also include archived notes in the search results (default to false)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Search notes based on a query.\nThe scope of the notes is restricted to the authenticated user.\nVarious optional filters are available to restrict the scope of the search even more."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

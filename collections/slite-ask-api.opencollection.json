@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Slite api Ask API",
+    "version": "1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ask",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ask a question",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/ask",
+            "params": [
+              {
+                "name": "question",
+                "value": "What are the onboarding steps?",
+                "type": "query",
+                "description": "Question to ask on your notes"
+              },
+              {
+                "name": "parentNoteId",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to only return notes under this parent note id"
+              },
+              {
+                "name": "assistantId",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to use a specific assistant for super only"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Ask a question to your notes in natural language.\nThe scope of the notes used to answer the question is restricted to the authenticated user.\nVarious optional filters are available to restrict the scope of the notes even more."
+        },
+        {
+          "info": {
+            "name": "List custom content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.slite.com/v1/ask/index",
+            "params": [
+              {
+                "name": "rootId",
+                "value": "a2ZSuHnZf",
+                "type": "query",
+                "description": "Root id of the object to gather sources from. This should be created from the UI as a new custom data source."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Used to perform pagination on search"
+              },
+              {
+                "name": "hitsPerPage",
+                "value": "",
+                "type": "query",
+                "description": "Specify how many notes to return per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List custom content ids from AskX usage."
+        },
+        {
+          "info": {
+            "name": "Index a custom content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.slite.com/v1/ask/index",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Index a custom content for AskX usage."
+        },
+        {
+          "info": {
+            "name": "Delete custom content",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.slite.com/v1/ask/index",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a custom content from AskX usage."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
