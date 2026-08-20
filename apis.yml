@@ -33,6 +33,15 @@ tags:
   - Notes
   - Team
   - Asynchronous Work
+  - Artificial Intelligence
+  - Search
+tags_raw:
+  - Documentation
+  - Knowledge Base
+  - Collaboration
+  - Notes
+  - Team
+  - Asynchronous Work
   - AI
   - Search
 apis:
@@ -56,6 +65,8 @@ apis:
   humanURL: https://developers.slite.com/
   baseURL: https://api.slite.com/v1
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -70,6 +81,8 @@ apis:
   humanURL: https://developers.slite.com/
   baseURL: https://api.slite.com/v1
   tags:
+  - Knowledge-Management
+  tags_raw:
   - Knowledge Management
   properties:
   - type: OpenAPI
@@ -126,6 +139,8 @@ apis:
   humanURL: https://developers.slite.com/
   baseURL: https://api.slite.com/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
