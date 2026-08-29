@@ -7,6 +7,18 @@ description: >-
   document creation, and automated knowledge management workflows. The Slite
   Public API provides programmatic access to workspaces using Bearer token
   authentication and follows the OpenAPI v3.0 standard.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
