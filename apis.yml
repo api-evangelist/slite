@@ -163,6 +163,8 @@ apis:
   - type: Authentication
     url: https://developers.slite.com/docs/getting-started
 common:
+  - type: Website
+    url: https://www.slite.com/
   - type: AgenticAccess
     url: agentic-access/slite-agentic-access.yml
   - type: DomainSecurity
