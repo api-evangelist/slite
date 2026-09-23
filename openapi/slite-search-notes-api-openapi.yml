@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Public Slite api Ask Search Notes API
+  title: Public Slite Search Notes API
   version: '1'
   description: Access your Slite documents, search, create, update...
   license:
@@ -147,10 +147,6 @@ paths:
       - Search Notes
 components:
   schemas:
-    SearchNotePage:
-      type: integer
-      format: int32
-      minimum: 0
     SearchNoteHit:
       properties:
         parentNotes:
@@ -184,17 +180,20 @@ components:
 
             It can be a collection, a discussion or a default rich_text.'
         archivedAt:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Date of the archiving of the note (null if not archived)
         iconColor:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Optional icon color for the note.
         iconShape:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Optional icon identifier for the note.
         lastEditedAt:
           type: string
@@ -220,18 +219,86 @@ components:
       - title
       - id
       type: object
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    SearchNoteHitsPerPage:
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 100
+    PublicApiError:
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+      required:
+      - message
+      - id
+      type: object
+    SearchNotePage:
+      type: integer
+      format: int32
+      minimum: 0
+    PublicApiAuthError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Invalid apiKey
+        id:
+          type: string
+          enum:
+          - auth/unauthorized
+      required:
+      - message
+      - id
+      type: object
+    PublicApiFieldValidationError:
+      properties:
+        details:
+          $ref: '#/components/schemas/FieldErrors'
+        message:
+          type: string
+          enum:
+          - Validation Failed
+        id:
+          type: string
+          enum:
+          - field-validation
+      required:
+      - message
+      - id
+      type: object
+    PublicApiRateLimitError:
+      properties:
+        message:
+          type: string
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+        id:
+          type: string
+          enum:
+          - rate-limit
+      required:
+      - message
+      - id
+      type: object
     PublicApiReviewState:
       enum:
       - Verified
       - Outdated
       - VerificationRequested
       - VerificationExpired
-      type: string
-    SearchNoteType:
-      enum:
-      - rich_text
-      - discussion
-      - collection
       type: string
     SearchNoteResult:
       properties:
@@ -252,82 +319,12 @@ components:
       - nbPages
       - page
       type: object
-    PublicApiFieldValidationError:
-      properties:
-        details:
-          $ref: '#/components/schemas/FieldErrors'
-        message:
-          type: string
-          enum:
-          - Validation Failed
-          nullable: false
-        id:
-          type: string
-          enum:
-          - field-validation
-          nullable: false
-      required:
-      - message
-      - id
-      type: object
-    SearchNoteHitsPerPage:
-      type: integer
-      format: int32
-      minimum: 1
-      maximum: 100
-    PublicApiRateLimitError:
-      properties:
-        message:
-          type: string
-          enum:
-          - You've reached the api rate limit. Please wait and retry later.
-          nullable: false
-        id:
-          type: string
-          enum:
-          - rate-limit
-          nullable: false
-      required:
-      - message
-      - id
-      type: object
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
-    PublicApiError:
-      properties:
-        message:
-          type: string
-        id:
-          type: string
-      required:
-      - message
-      - id
-      type: object
-    PublicApiAuthError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Invalid apiKey
-          nullable: false
-        id:
-          type: string
-          enum:
-          - auth/unauthorized
-          nullable: false
-      required:
-      - message
-      - id
-      type: object
+    SearchNoteType:
+      enum:
+      - rich_text
+      - discussion
+      - collection
+      type: string
   securitySchemes:
     bearer:
       type: http

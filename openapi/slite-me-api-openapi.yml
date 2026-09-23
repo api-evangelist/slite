@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Public Slite api Ask Me API
+  title: Public Slite Me API
   version: '1'
   description: Access your Slite documents, search, create, update...
   license:
@@ -54,7 +54,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
       description: Return authenticated user information.
-      summary: Return the authenticated user information.
+      summary: Return the authenticated user information
       security:
       - bearer: []
       parameters: []
@@ -81,40 +81,6 @@ components:
       - organizationDomain
       - organizationName
       - displayName
-      type: object
-    PublicApiFieldValidationError:
-      properties:
-        details:
-          $ref: '#/components/schemas/FieldErrors'
-        message:
-          type: string
-          enum:
-          - Validation Failed
-          nullable: false
-        id:
-          type: string
-          enum:
-          - field-validation
-          nullable: false
-      required:
-      - message
-      - id
-      type: object
-    PublicApiRateLimitError:
-      properties:
-        message:
-          type: string
-          enum:
-          - You've reached the api rate limit. Please wait and retry later.
-          nullable: false
-        id:
-          type: string
-          enum:
-          - rate-limit
-          nullable: false
-      required:
-      - message
-      - id
       type: object
     FieldErrors:
       properties: {}
@@ -143,12 +109,40 @@ components:
           type: string
           enum:
           - Invalid apiKey
-          nullable: false
         id:
           type: string
           enum:
           - auth/unauthorized
-          nullable: false
+      required:
+      - message
+      - id
+      type: object
+    PublicApiFieldValidationError:
+      properties:
+        details:
+          $ref: '#/components/schemas/FieldErrors'
+        message:
+          type: string
+          enum:
+          - Validation Failed
+        id:
+          type: string
+          enum:
+          - field-validation
+      required:
+      - message
+      - id
+      type: object
+    PublicApiRateLimitError:
+      properties:
+        message:
+          type: string
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+        id:
+          type: string
+          enum:
+          - rate-limit
       required:
       - message
       - id

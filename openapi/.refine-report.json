@@ -1,13 +1,7 @@
 {
   "provider": "slite",
   "sources": [
-    "slite-ask-api-openapi.yml",
-    "slite-groups-api-openapi.yml",
-    "slite-knowledge-management-api-openapi.yml",
-    "slite-me-api-openapi.yml",
-    "slite-notes-api-openapi.yml",
-    "slite-search-notes-api-openapi.yml",
-    "slite-users-api-openapi.yml"
+    "_original/openapi.json"
   ],
   "outputs": [
     "slite-ask-api-openapi.yml",
@@ -21,6 +15,50 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "openapi.json: tagged paths GET /ask -> Ask",
+    "openapi.json: tagged paths POST /ask/index -> Ask",
+    "openapi.json: tagged paths DELETE /ask/index -> Ask",
+    "openapi.json: tagged paths GET /ask/index -> Ask",
+    "openapi.json: tagged paths GET /knowledge-management/notes -> Knowledge Management",
+    "openapi.json: tagged paths GET /knowledge-management/notes/public -> Knowledge Management",
+    "openapi.json: tagged paths GET /knowledge-management/notes/inactive -> Knowledge Management",
+    "openapi.json: tagged paths GET /knowledge-management/notes/empty -> Knowledge Management",
+    "openapi.json: tagged paths GET /me -> Me",
+    "openapi.json: tagged paths GET /notes -> Notes",
+    "openapi.json: tagged paths POST /notes -> Notes",
+    "openapi.json: tagged paths GET /notes/{noteId} -> Notes",
+    "openapi.json: tagged paths DELETE /notes/{noteId} -> Notes",
+    "openapi.json: tagged paths PUT /notes/{noteId} -> Notes",
+    "openapi.json: tagged paths GET /notes/{noteId}/children -> Notes",
+    "openapi.json: tagged paths PUT /notes/{noteId}/verify -> Notes",
+    "openapi.json: tagged paths PUT /notes/{noteId}/flag-as-outdated -> Notes",
+    "openapi.json: tagged paths PUT /notes/{noteId}/archived -> Notes",
+    "openapi.json: tagged paths PUT /notes/{noteId}/owner -> Notes",
+    "openapi.json: tagged paths PUT /notes/{noteId}/tiles/{tileId} -> Notes",
+    "openapi.json: tagged paths GET /search-notes -> Search Notes",
+    "openapi.json: tagged paths GET /users/{userId} -> Users",
+    "openapi.json: tagged paths GET /users -> Users",
+    "openapi.json: tagged paths GET /groups/{groupId} -> Groups",
+    "openapi.json: tagged paths GET /groups -> Groups",
+    "openapi.json: declared missing tag: Ask",
+    "openapi.json: declared missing tag: Groups",
+    "openapi.json: declared missing tag: Knowledge Management",
+    "openapi.json: declared missing tag: Me",
+    "openapi.json: declared missing tag: Notes",
+    "openapi.json: declared missing tag: Search Notes",
+    "openapi.json: declared missing tag: Users",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "slite-ask-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "slite-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "slite-knowledge-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "slite-me-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "slite-notes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "slite-search-notes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "slite-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
