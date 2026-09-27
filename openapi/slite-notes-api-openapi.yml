@@ -935,47 +935,20 @@ components:
       - hasNextPage
       - nextCursor
       type: object
-    NoteContentFormat:
+    PublicApiReviewState:
       enum:
-      - md
-      - html
-      - sliteml
+      - Verified
+      - Outdated
+      - VerificationRequested
+      - VerificationExpired
       type: string
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
-    PublicApiError:
-      properties:
-        message:
-          type: string
-        id:
-          type: string
-      required:
-      - message
-      - id
-      type: object
-    PublicApiAuthError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Invalid apiKey
-        id:
-          type: string
-          enum:
-          - auth/unauthorized
-      required:
-      - message
-      - id
-      type: object
+    ListNotesOrderBy:
+      enum:
+      - lastEditedAt_DESC
+      - lastEditedAt_ASC
+      - listPosition_DESC
+      - listPosition_ASC
+      type: string
     Note:
       properties:
         owner:
@@ -1056,50 +1029,6 @@ components:
       - title
       - id
       type: object
-    NoteWithContent:
-      allOf:
-      - $ref: '#/components/schemas/Note'
-      - properties:
-          content:
-            type: string
-            description: Content of the note in Markdown, Html, or SliteML
-            format: blob
-        required:
-        - content
-        type: object
-    Html:
-      type: string
-    PublicApiReviewState:
-      enum:
-      - Verified
-      - Outdated
-      - VerificationRequested
-      - VerificationExpired
-      type: string
-    ListNotesOrderBy:
-      enum:
-      - lastEditedAt_DESC
-      - lastEditedAt_ASC
-      - listPosition_DESC
-      - listPosition_ASC
-      type: string
-    PublicApiRateLimitError:
-      properties:
-        message:
-          type: string
-          enum:
-          - You've reached the api rate limit. Please wait and retry later.
-        id:
-          type: string
-          enum:
-          - rate-limit
-      required:
-      - message
-      - id
-      type: object
-    Markdown:
-      type: string
-      format: blob
     PublicApiFieldValidationError:
       properties:
         details:
@@ -1116,6 +1045,77 @@ components:
       - message
       - id
       type: object
+    PublicApiRateLimitError:
+      properties:
+        message:
+          type: string
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+        id:
+          type: string
+          enum:
+          - rate-limit
+      required:
+      - message
+      - id
+      type: object
+    PublicApiError:
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+      required:
+      - message
+      - id
+      type: object
+    PublicApiAuthError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Invalid apiKey
+        id:
+          type: string
+          enum:
+          - auth/unauthorized
+      required:
+      - message
+      - id
+      type: object
+    NoteContentFormat:
+      enum:
+      - md
+      - html
+      - sliteml
+      type: string
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    NoteWithContent:
+      allOf:
+      - $ref: '#/components/schemas/Note'
+      - properties:
+          content:
+            type: string
+            description: Content of the note in Markdown, Html, or SliteML
+            format: blob
+        required:
+        - content
+        type: object
+    Html:
+      type: string
+    Markdown:
+      type: string
+      format: blob
     NoteOwner:
       properties:
         groupId:

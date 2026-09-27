@@ -131,78 +131,12 @@ paths:
       - Groups
 components:
   schemas:
-    PaginatedGroups:
-      properties:
-        nextCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page
-        hasNextPage:
-          type: boolean
-          description: Whether there are more results
-        total:
-          type: number
-          format: double
-          description: Total count of groups matching the query
-        groups:
-          items:
-            $ref: '#/components/schemas/Group'
-          type: array
-          description: List of groups
-      required:
-      - nextCursor
-      - hasNextPage
-      - total
-      - groups
-      type: object
-    Group:
-      properties:
-        description:
-          type: string
-          description: Description of the group
-        name:
-          type: string
-          description: Group name
-        id:
-          type: string
-          description: Group ID
-      required:
-      - description
-      - name
-      - id
-      type: object
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
     PublicApiError:
       properties:
         message:
           type: string
         id:
           type: string
-      required:
-      - message
-      - id
-      type: object
-    PublicApiAuthError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Invalid apiKey
-        id:
-          type: string
-          enum:
-          - auth/unauthorized
       required:
       - message
       - id
@@ -237,6 +171,20 @@ components:
       - message
       - id
       type: object
+    PublicApiAuthError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Invalid apiKey
+        id:
+          type: string
+          enum:
+          - auth/unauthorized
+      required:
+      - message
+      - id
+      type: object
     PublicApiNotFoundError:
       properties:
         message:
@@ -250,6 +198,58 @@ components:
       required:
       - message
       - id
+      type: object
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    Group:
+      properties:
+        description:
+          type: string
+          description: Description of the group
+        name:
+          type: string
+          description: Group name
+        id:
+          type: string
+          description: Group ID
+      required:
+      - description
+      - name
+      - id
+      type: object
+    PaginatedGroups:
+      properties:
+        nextCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page
+        hasNextPage:
+          type: boolean
+          description: Whether there are more results
+        total:
+          type: number
+          format: double
+          description: Total count of groups matching the query
+        groups:
+          items:
+            $ref: '#/components/schemas/Group'
+          type: array
+          description: List of groups
+      required:
+      - nextCursor
+      - hasNextPage
+      - total
+      - groups
       type: object
   securitySchemes:
     bearer:
