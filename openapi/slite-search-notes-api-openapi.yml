@@ -147,13 +147,11 @@ paths:
       - Search Notes
 components:
   schemas:
-    PublicApiReviewState:
-      enum:
-      - Verified
-      - Outdated
-      - VerificationRequested
-      - VerificationExpired
-      type: string
+    SearchNoteHitsPerPage:
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 100
     PublicApiFieldValidationError:
       properties:
         details:
@@ -166,6 +164,44 @@ components:
           type: string
           enum:
           - field-validation
+      required:
+      - message
+      - id
+      type: object
+    PublicApiAuthError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Invalid apiKey
+        id:
+          type: string
+          enum:
+          - auth/unauthorized
+      required:
+      - message
+      - id
+      type: object
+    PublicApiError:
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+      required:
+      - message
+      - id
+      type: object
+    PublicApiRateLimitError:
+      properties:
+        message:
+          type: string
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+        id:
+          type: string
+          enum:
+          - rate-limit
       required:
       - message
       - id
@@ -189,64 +225,6 @@ components:
       - nbPages
       - page
       type: object
-    PublicApiError:
-      properties:
-        message:
-          type: string
-        id:
-          type: string
-      required:
-      - message
-      - id
-      type: object
-    SearchNoteHitsPerPage:
-      type: integer
-      format: int32
-      minimum: 1
-      maximum: 100
-    PublicApiRateLimitError:
-      properties:
-        message:
-          type: string
-          enum:
-          - You've reached the api rate limit. Please wait and retry later.
-        id:
-          type: string
-          enum:
-          - rate-limit
-      required:
-      - message
-      - id
-      type: object
-    PublicApiAuthError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Invalid apiKey
-        id:
-          type: string
-          enum:
-          - auth/unauthorized
-      required:
-      - message
-      - id
-      type: object
-    SearchNotePage:
-      type: integer
-      format: int32
-      minimum: 0
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
     SearchNoteHit:
       properties:
         parentNotes:
@@ -319,11 +297,33 @@ components:
       - title
       - id
       type: object
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    SearchNotePage:
+      type: integer
+      format: int32
+      minimum: 0
     SearchNoteType:
       enum:
       - rich_text
       - discussion
       - collection
+      type: string
+    PublicApiReviewState:
+      enum:
+      - Verified
+      - Outdated
+      - VerificationRequested
+      - VerificationExpired
       type: string
   securitySchemes:
     bearer:

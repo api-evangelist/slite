@@ -62,16 +62,6 @@ paths:
       - Me
 components:
   schemas:
-    PublicApiError:
-      properties:
-        message:
-          type: string
-        id:
-          type: string
-      required:
-      - message
-      - id
-      type: object
     PublicApiFieldValidationError:
       properties:
         details:
@@ -84,20 +74,6 @@ components:
           type: string
           enum:
           - field-validation
-      required:
-      - message
-      - id
-      type: object
-    PublicApiRateLimitError:
-      properties:
-        message:
-          type: string
-          enum:
-          - You've reached the api rate limit. Please wait and retry later.
-        id:
-          type: string
-          enum:
-          - rate-limit
       required:
       - message
       - id
@@ -116,17 +92,16 @@ components:
       - message
       - id
       type: object
-    FieldErrors:
-      properties: {}
+    PublicApiError:
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+      required:
+      - message
+      - id
       type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
     Me:
       properties:
         email:
@@ -147,6 +122,31 @@ components:
       - organizationName
       - displayName
       type: object
+    PublicApiRateLimitError:
+      properties:
+        message:
+          type: string
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+        id:
+          type: string
+          enum:
+          - rate-limit
+      required:
+      - message
+      - id
+      type: object
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
   securitySchemes:
     bearer:
       type: http

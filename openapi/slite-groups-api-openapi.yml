@@ -131,16 +131,6 @@ paths:
       - Groups
 components:
   schemas:
-    PublicApiError:
-      properties:
-        message:
-          type: string
-        id:
-          type: string
-      required:
-      - message
-      - id
-      type: object
     PublicApiFieldValidationError:
       properties:
         details:
@@ -153,20 +143,6 @@ components:
           type: string
           enum:
           - field-validation
-      required:
-      - message
-      - id
-      type: object
-    PublicApiRateLimitError:
-      properties:
-        message:
-          type: string
-          enum:
-          - You've reached the api rate limit. Please wait and retry later.
-        id:
-          type: string
-          enum:
-          - rate-limit
       required:
       - message
       - id
@@ -185,6 +161,16 @@ components:
       - message
       - id
       type: object
+    PublicApiError:
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+      required:
+      - message
+      - id
+      type: object
     PublicApiNotFoundError:
       properties:
         message:
@@ -195,6 +181,20 @@ components:
           type: string
           enum:
           - root-id-not-found
+      required:
+      - message
+      - id
+      type: object
+    PublicApiRateLimitError:
+      properties:
+        message:
+          type: string
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+        id:
+          type: string
+          enum:
+          - rate-limit
       required:
       - message
       - id
@@ -210,22 +210,6 @@ components:
         required:
         - message
         type: object
-    Group:
-      properties:
-        description:
-          type: string
-          description: Description of the group
-        name:
-          type: string
-          description: Group name
-        id:
-          type: string
-          description: Group ID
-      required:
-      - description
-      - name
-      - id
-      type: object
     PaginatedGroups:
       properties:
         nextCursor:
@@ -250,6 +234,22 @@ components:
       - hasNextPage
       - total
       - groups
+      type: object
+    Group:
+      properties:
+        description:
+          type: string
+          description: Description of the group
+        name:
+          type: string
+          description: Group name
+        id:
+          type: string
+          description: Group ID
+      required:
+      - description
+      - name
+      - id
       type: object
   securitySchemes:
     bearer:

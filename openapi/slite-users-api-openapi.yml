@@ -140,6 +140,110 @@ paths:
       - Users
 components:
   schemas:
+    PaginatedUsers:
+      properties:
+        nextCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page
+        hasNextPage:
+          type: boolean
+          description: Whether there are more results
+        total:
+          type: number
+          format: double
+          description: Total count of users matching the query
+        users:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+          description: List of users
+      required:
+      - nextCursor
+      - hasNextPage
+      - total
+      - users
+      type: object
+    PublicApiFieldValidationError:
+      properties:
+        details:
+          $ref: '#/components/schemas/FieldErrors'
+        message:
+          type: string
+          enum:
+          - Validation Failed
+        id:
+          type: string
+          enum:
+          - field-validation
+      required:
+      - message
+      - id
+      type: object
+    PublicApiAuthError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Invalid apiKey
+        id:
+          type: string
+          enum:
+          - auth/unauthorized
+      required:
+      - message
+      - id
+      type: object
+    PublicApiError:
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+      required:
+      - message
+      - id
+      type: object
+    PublicApiNotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Data source not found.
+        id:
+          type: string
+          enum:
+          - root-id-not-found
+      required:
+      - message
+      - id
+      type: object
+    PublicApiRateLimitError:
+      properties:
+        message:
+          type: string
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+        id:
+          type: string
+          enum:
+          - rate-limit
+      required:
+      - message
+      - id
+      type: object
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
     User:
       properties:
         organizationRole:
@@ -167,110 +271,6 @@ components:
       - displayName
       - email
       - id
-      type: object
-    PublicApiError:
-      properties:
-        message:
-          type: string
-        id:
-          type: string
-      required:
-      - message
-      - id
-      type: object
-    PublicApiFieldValidationError:
-      properties:
-        details:
-          $ref: '#/components/schemas/FieldErrors'
-        message:
-          type: string
-          enum:
-          - Validation Failed
-        id:
-          type: string
-          enum:
-          - field-validation
-      required:
-      - message
-      - id
-      type: object
-    PublicApiRateLimitError:
-      properties:
-        message:
-          type: string
-          enum:
-          - You've reached the api rate limit. Please wait and retry later.
-        id:
-          type: string
-          enum:
-          - rate-limit
-      required:
-      - message
-      - id
-      type: object
-    PublicApiAuthError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Invalid apiKey
-        id:
-          type: string
-          enum:
-          - auth/unauthorized
-      required:
-      - message
-      - id
-      type: object
-    PublicApiNotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Data source not found.
-        id:
-          type: string
-          enum:
-          - root-id-not-found
-      required:
-      - message
-      - id
-      type: object
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
-    PaginatedUsers:
-      properties:
-        nextCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page
-        hasNextPage:
-          type: boolean
-          description: Whether there are more results
-        total:
-          type: number
-          format: double
-          description: Total count of users matching the query
-        users:
-          items:
-            $ref: '#/components/schemas/User'
-          type: array
-          description: List of users
-      required:
-      - nextCursor
-      - hasNextPage
-      - total
-      - users
       type: object
   securitySchemes:
     bearer:
