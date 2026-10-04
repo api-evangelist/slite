@@ -363,6 +363,11 @@ paths:
       - Ask
 components:
   schemas:
+    ObjectType:
+      enum:
+      - markdown
+      - html
+      type: string
     Source:
       properties:
         explanation:
@@ -389,7 +394,99 @@ components:
       - title
       - id
       type: object
-    AskDisabledError:
+    ListHitsPerPage:
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 100
+    PublicApiFieldValidationError:
+      properties:
+        details:
+          $ref: '#/components/schemas/FieldErrors'
+        message:
+          type: string
+          enum:
+          - Validation Failed
+        id:
+          type: string
+          enum:
+          - field-validation
+      required:
+      - message
+      - id
+      type: object
+    PublicApiNotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Data source not found.
+        id:
+          type: string
+          enum:
+          - root-id-not-found
+      required:
+      - message
+      - id
+      type: object
+    PublicApiError:
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+      required:
+      - message
+      - id
+      type: object
+    PublicApiDisabledError:
+      properties:
+        message:
+          type: string
+          enum:
+          - This feature is disabled for your organization. Please contact support.
+        id:
+          type: string
+          enum:
+          - askx-disabled
+      required:
+      - message
+      - id
+      type: object
+    ListResult:
+      properties:
+        hits:
+          items:
+            $ref: '#/components/schemas/Source'
+          type: array
+        nbPages:
+          type: number
+          format: double
+          description: Total number of pages for the current query
+        page:
+          type: number
+          format: double
+          description: Current page number of the search pagination
+      required:
+      - hits
+      - nbPages
+      - page
+      type: object
+    AnswerAndSources:
+      properties:
+        sources:
+          items:
+            $ref: '#/components/schemas/Source'
+          type: array
+          description: Array of sources that were used to answer the question
+        answer:
+          type: string
+          description: Answer to the question
+      required:
+      - sources
+      - answer
+      type: object
+    AskRateLimitedError:
       properties:
         name:
           type: string
@@ -409,22 +506,6 @@ components:
       - status
       type: object
       additionalProperties: false
-    PublicApiFieldValidationError:
-      properties:
-        details:
-          $ref: '#/components/schemas/FieldErrors'
-        message:
-          type: string
-          enum:
-          - Validation Failed
-        id:
-          type: string
-          enum:
-          - field-validation
-      required:
-      - message
-      - id
-      type: object
     PublicApiAuthError:
       properties:
         message:
@@ -439,64 +520,11 @@ components:
       - message
       - id
       type: object
-    PublicApiError:
-      properties:
-        message:
-          type: string
-        id:
-          type: string
-      required:
-      - message
-      - id
-      type: object
-    PublicApiNotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Data source not found.
-        id:
-          type: string
-          enum:
-          - root-id-not-found
-      required:
-      - message
-      - id
-      type: object
-    ObjectType:
-      enum:
-      - markdown
-      - html
-      type: string
-    PublicApiRateLimitError:
-      properties:
-        message:
-          type: string
-          enum:
-          - You've reached the api rate limit. Please wait and retry later.
-        id:
-          type: string
-          enum:
-          - rate-limit
-      required:
-      - message
-      - id
-      type: object
-    PublicApiDisabledError:
-      properties:
-        message:
-          type: string
-          enum:
-          - This feature is disabled for your organization. Please contact support.
-        id:
-          type: string
-          enum:
-          - askx-disabled
-      required:
-      - message
-      - id
-      type: object
-    AskRateLimitedError:
+    ListPage:
+      type: integer
+      format: int32
+      minimum: 0
+    AskDisabledError:
       properties:
         name:
           type: string
@@ -527,47 +555,19 @@ components:
         required:
         - message
         type: object
-    AnswerAndSources:
+    PublicApiRateLimitError:
       properties:
-        sources:
-          items:
-            $ref: '#/components/schemas/Source'
-          type: array
-          description: Array of sources that were used to answer the question
-        answer:
+        message:
           type: string
-          description: Answer to the question
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+        id:
+          type: string
+          enum:
+          - rate-limit
       required:
-      - sources
-      - answer
-      type: object
-    ListHitsPerPage:
-      type: integer
-      format: int32
-      minimum: 1
-      maximum: 100
-    ListPage:
-      type: integer
-      format: int32
-      minimum: 0
-    ListResult:
-      properties:
-        hits:
-          items:
-            $ref: '#/components/schemas/Source'
-          type: array
-        nbPages:
-          type: number
-          format: double
-          description: Total number of pages for the current query
-        page:
-          type: number
-          format: double
-          description: Current page number of the search pagination
-      required:
-      - hits
-      - nbPages
-      - page
+      - message
+      - id
       type: object
   securitySchemes:
     bearer:

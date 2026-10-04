@@ -360,16 +360,19 @@ components:
       - message
       - id
       type: object
-    PublicApiAuthError:
+    PublicApiReviewState:
+      enum:
+      - Verified
+      - Outdated
+      - VerificationRequested
+      - VerificationExpired
+      type: string
+    PublicApiError:
       properties:
         message:
           type: string
-          enum:
-          - Invalid apiKey
         id:
           type: string
-          enum:
-          - auth/unauthorized
       required:
       - message
       - id
@@ -454,12 +457,44 @@ components:
       - title
       - id
       type: object
-    PublicApiError:
+    NoteOwner:
+      properties:
+        groupId:
+          type: string
+          description: Group id of the owner (if owner is a group)
+        userId:
+          type: string
+          description: User id of the owner (if owner is a user)
+      type: object
+      description: 'Owner of the note for review purposes.
+
+        Either userId or groupId will be set, but not both.'
+    KnowledgeManagementFirst:
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 50
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    PublicApiAuthError:
       properties:
         message:
           type: string
+          enum:
+          - Invalid apiKey
         id:
           type: string
+          enum:
+          - auth/unauthorized
       required:
       - message
       - id
@@ -478,41 +513,6 @@ components:
       - message
       - id
       type: object
-    NoteOwner:
-      properties:
-        groupId:
-          type: string
-          description: Group id of the owner (if owner is a group)
-        userId:
-          type: string
-          description: User id of the owner (if owner is a user)
-      type: object
-      description: 'Owner of the note for review purposes.
-
-        Either userId or groupId will be set, but not both.'
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
-    PublicApiReviewState:
-      enum:
-      - Verified
-      - Outdated
-      - VerificationRequested
-      - VerificationExpired
-      type: string
-    KnowledgeManagementFirst:
-      type: integer
-      format: int32
-      minimum: 1
-      maximum: 50
   securitySchemes:
     bearer:
       type: http

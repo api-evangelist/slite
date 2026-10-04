@@ -911,23 +911,6 @@ paths:
       - Notes
 components:
   schemas:
-    NoteContentFormat:
-      enum:
-      - md
-      - html
-      - sliteml
-      type: string
-    NoteWithContent:
-      allOf:
-      - $ref: '#/components/schemas/Note'
-      - properties:
-          content:
-            type: string
-            description: Content of the note in Markdown, Html, or SliteML
-            format: blob
-        required:
-        - content
-        type: object
     PaginatedNotes:
       properties:
         notes:
@@ -952,6 +935,17 @@ components:
       - hasNextPage
       - nextCursor
       type: object
+    NoteWithContent:
+      allOf:
+      - $ref: '#/components/schemas/Note'
+      - properties:
+          content:
+            type: string
+            description: Content of the note in Markdown, Html, or SliteML
+            format: blob
+        required:
+        - content
+        type: object
     PublicApiFieldValidationError:
       properties:
         details:
@@ -968,6 +962,20 @@ components:
       - message
       - id
       type: object
+    PublicApiReviewState:
+      enum:
+      - Verified
+      - Outdated
+      - VerificationRequested
+      - VerificationExpired
+      type: string
+    ListNotesOrderBy:
+      enum:
+      - lastEditedAt_DESC
+      - lastEditedAt_ASC
+      - listPosition_DESC
+      - listPosition_ASC
+      type: string
     Note:
       properties:
         owner:
@@ -1048,6 +1056,39 @@ components:
       - title
       - id
       type: object
+    NoteOwner:
+      properties:
+        groupId:
+          type: string
+          description: Group id of the owner (if owner is a group)
+        userId:
+          type: string
+          description: User id of the owner (if owner is a user)
+      type: object
+      description: 'Owner of the note for review purposes.
+
+        Either userId or groupId will be set, but not both.'
+    PublicApiError:
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+      required:
+      - message
+      - id
+      type: object
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
     PublicApiAuthError:
       properties:
         message:
@@ -1062,16 +1103,9 @@ components:
       - message
       - id
       type: object
-    PublicApiError:
-      properties:
-        message:
-          type: string
-        id:
-          type: string
-      required:
-      - message
-      - id
-      type: object
+    Markdown:
+      type: string
+      format: blob
     PublicApiRateLimitError:
       properties:
         message:
@@ -1086,45 +1120,11 @@ components:
       - message
       - id
       type: object
-    Markdown:
-      type: string
-      format: blob
-    NoteOwner:
-      properties:
-        groupId:
-          type: string
-          description: Group id of the owner (if owner is a group)
-        userId:
-          type: string
-          description: User id of the owner (if owner is a user)
-      type: object
-      description: 'Owner of the note for review purposes.
-
-        Either userId or groupId will be set, but not both.'
-    ListNotesOrderBy:
+    NoteContentFormat:
       enum:
-      - lastEditedAt_DESC
-      - lastEditedAt_ASC
-      - listPosition_DESC
-      - listPosition_ASC
-      type: string
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
-    PublicApiReviewState:
-      enum:
-      - Verified
-      - Outdated
-      - VerificationRequested
-      - VerificationExpired
+      - md
+      - html
+      - sliteml
       type: string
     Html:
       type: string

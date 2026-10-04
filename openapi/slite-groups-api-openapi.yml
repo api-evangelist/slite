@@ -147,30 +147,6 @@ components:
       - message
       - id
       type: object
-    PublicApiAuthError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Invalid apiKey
-        id:
-          type: string
-          enum:
-          - auth/unauthorized
-      required:
-      - message
-      - id
-      type: object
-    PublicApiError:
-      properties:
-        message:
-          type: string
-        id:
-          type: string
-      required:
-      - message
-      - id
-      type: object
     PublicApiNotFoundError:
       properties:
         message:
@@ -185,31 +161,16 @@ components:
       - message
       - id
       type: object
-    PublicApiRateLimitError:
+    PublicApiError:
       properties:
         message:
           type: string
-          enum:
-          - You've reached the api rate limit. Please wait and retry later.
         id:
           type: string
-          enum:
-          - rate-limit
       required:
       - message
       - id
       type: object
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
     PaginatedGroups:
       properties:
         nextCursor:
@@ -235,6 +196,31 @@ components:
       - total
       - groups
       type: object
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    PublicApiAuthError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Invalid apiKey
+        id:
+          type: string
+          enum:
+          - auth/unauthorized
+      required:
+      - message
+      - id
+      type: object
     Group:
       properties:
         description:
@@ -249,6 +235,20 @@ components:
       required:
       - description
       - name
+      - id
+      type: object
+    PublicApiRateLimitError:
+      properties:
+        message:
+          type: string
+          enum:
+          - You've reached the api rate limit. Please wait and retry later.
+        id:
+          type: string
+          enum:
+          - rate-limit
+      required:
+      - message
       - id
       type: object
   securitySchemes:
