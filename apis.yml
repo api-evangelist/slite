@@ -52,6 +52,7 @@ tags:
   - Asynchronous Work
   - Artificial Intelligence
   - Search
+  - Knowledge Management
 tags_raw:
   - Documentation
   - Knowledge Base
@@ -61,6 +62,7 @@ tags_raw:
   - Asynchronous Work
   - AI
   - Search
+  - Knowledge Management
 apis:
 - aid: slite:slite-ask-api
   name: Slite Ask API
@@ -168,6 +170,9 @@ apis:
   - type: Authentication
     url: https://developers.slite.com/docs/getting-started
 common:
+  - type: CapabilityMap
+    url: capabilities/slite-capability-edges.yml
+    name: Slite Business Capability Map
   - type: Website
     url: https://www.slite.com/
   - type: AgenticAccess
