@@ -1,0 +1,46 @@
+slug: slite
+provider: Slite
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Notes
+  spec_file: slite-notes-api-openapi.yml
+  capability_id: BC-830
+  capability_id_l1: BC-830
+  capability_name: Knowledge Management
+  confidence: 0.8
+  evidence: POST /notes 'Create a note'; PUT /notes/{noteId}/verify 'Verify a note'; PUT /notes/{noteId}/flag-as-outdated
+    'Flag note as outdated'; PUT /notes/{noteId}/owner 'Update note owner'
+  reason: Full lifecycle of documentation artefacts including verification, outdating and ownership assignment
+    — capture plus curation of organisational knowledge. Spans both BC-830.10 and BC-830.20, so only L1
+    is asserted.
+- tag: Knowledge Management
+  spec_file: slite-knowledge-management-api-openapi.yml
+  capability_id: BC-830.20
+  capability_id_l1: BC-830
+  capability_name: Knowledge Curation & Taxonomy Management
+  confidence: 0.75
+  evidence: GET /knowledge-management/notes/inactive 'List inactive notes for knowledge management'; GET
+    /knowledge-management/notes/empty 'List empty notes for knowledge management'; schema 'PublicApiReviewState'
+  reason: Operations surface stale, empty and public documents with a review state — hygiene and curation
+    of the documentation estate, i.e. knowledge curation. Not pure search or plumbing.
+- tag: Ask
+  spec_file: slite-ask-api-openapi.yml
+  capability_id: BC-830
+  capability_id_l1: BC-830
+  capability_name: Knowledge Management
+  confidence: 0.7
+  evidence: GET /ask 'Ask a question'; POST /ask/index 'Index a custom content'; schema 'AnswerAndSources'
+  reason: AI question-answering over the workspace's documents and indexing of custom content serves retrieval
+    and sharing of organisational knowledge (BC-830). Which sub-capability (capture vs. curation vs. sharing)
+    is not pinned down by the four operations, so only the L1 is asserted.
